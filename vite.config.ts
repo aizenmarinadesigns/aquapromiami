@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: '/aquapromiami/', // <--- Agregamos esta línea mágica ✨
   server: {
     host: "::",
     port: 8080,
