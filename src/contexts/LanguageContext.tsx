@@ -206,6 +206,38 @@ const translations: Record<string, Record<Language, string>> = {
     es: 'Hola! Me interesa información sobre servicios de limpieza de piscinas.', 
     en: 'Hi! I\'m interested in information about pool cleaning services.' 
   },
+
+  // Booking Section
+  'booking.badge': { es: 'Reservaciones', en: 'Bookings' },
+  'booking.title': { es: 'Reserve Su Cita', en: 'Book Your Appointment' },
+  'booking.subtitle': { 
+    es: 'Seleccione una fecha y hora disponible para su servicio de piscina', 
+    en: 'Select an available date and time for your pool service' 
+  },
+  'booking.select.date': { es: 'Seleccione una fecha', en: 'Select a date' },
+  'booking.select.time': { es: 'Horarios disponibles', en: 'Available time slots' },
+  'booking.select.date.first': { es: 'Primero seleccione una fecha en el calendario', en: 'First select a date on the calendar' },
+  'booking.slot.1': { es: '8:00 AM - 10:00 AM', en: '8:00 AM - 10:00 AM' },
+  'booking.slot.2': { es: '10:00 AM - 12:00 PM', en: '10:00 AM - 12:00 PM' },
+  'booking.slot.3': { es: '1:00 PM - 3:00 PM', en: '1:00 PM - 3:00 PM' },
+  'booking.slot.4': { es: '3:00 PM - 5:00 PM', en: '3:00 PM - 5:00 PM' },
+  'booking.selected': { es: 'Seleccionado', en: 'Selected' },
+  'booking.confirm': { es: 'Confirmar Reserva por WhatsApp', en: 'Confirm Booking via WhatsApp' },
+  'booking.weekend.note': { es: 'No trabajamos fines de semana', en: 'We don\'t work weekends' },
+  'booking.confirmation.text': { es: 'Ha seleccionado:', en: 'You selected:' },
+
+  // Gallery Section
+  'gallery.badge': { es: 'Galería', en: 'Gallery' },
+  'gallery.title': { es: 'Transformaciones Reales', en: 'Real Transformations' },
+  'gallery.subtitle': { 
+    es: 'Vea el antes y después de nuestro trabajo profesional', 
+    en: 'See the before and after of our professional work' 
+  },
+  'gallery.before': { es: 'Antes', en: 'Before' },
+  'gallery.after': { es: 'Después', en: 'After' },
+  'gallery.click.view': { es: 'Click para ver', en: 'Click to view' },
+  'gallery.of': { es: 'de', en: 'of' },
+  'gallery.close': { es: 'Cerrar', en: 'Close' },
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
