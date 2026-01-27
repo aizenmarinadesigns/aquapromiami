@@ -1,9 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight, X, Images } from 'lucide-react';
+import { Images, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface GalleryItem {
@@ -52,203 +50,195 @@ const galleryItems: GalleryItem[] = [
   },
 ];
 
-export function GallerySection() {
-  const { t } = useLanguage();
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showAfter, setShowAfter] = useState(false);
+function BeforeAfterCard({ item, t }: { item: GalleryItem; t: (key: string) => string }) {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-  const openLightbox = (index: number) => {
-    setCurrentIndex(index);
-    setShowAfter(false);
-    setLightboxOpen(true);
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
   };
 
-  const closeLightbox = () => {
-    setLightboxOpen(false);
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    handleMove(e.clientX);
   };
 
-  const goToPrevious = useCallback(() => {
-    setCurrentIndex((prev) => (prev === 0 ? galleryItems.length - 1 : prev - 1));
-    setShowAfter(false);
-  }, []);
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    handleMove(e.touches[0].clientX);
+  };
 
-  const goToNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev === galleryItems.length - 1 ? 0 : prev + 1));
-    setShowAfter(false);
-  }, []);
-
-  // Keyboard navigation
   useEffect(() => {
-    if (!lightboxOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') goToPrevious();
-      if (e.key === 'ArrowRight') goToNext();
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === ' ') {
-        e.preventDefault();
-        setShowAfter((prev) => !prev);
-      }
+    const handleMouseUp = () => setIsDragging(false);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchend', handleMouseUp);
+    return () => {
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchend', handleMouseUp);
     };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, goToPrevious, goToNext]);
-
-  const currentItem = galleryItems[currentIndex];
+  }, []);
 
   return (
-    <section id="gallery" className="py-20 bg-background">
+    <div className="overflow-hidden rounded-xl shadow-md border border-border bg-card">
+      <div
+        ref={containerRef}
+        className="relative aspect-[4/3] cursor-ew-resize select-none overflow-hidden"
+        onMouseDown={() => setIsDragging(true)}
+        onMouseMove={handleMouseMove}
+        onTouchStart={() => setIsDragging(true)}
+        onTouchMove={handleTouchMove}
+      >
+        {/* After Image (Background) */}
+        <img
+          src={item.after}
+          alt={`${item.title} - After`}
+          className="absolute inset-0 w-full h-full object-cover"
+          draggable={false}
+        />
+        
+        {/* Before Image (Clipped) */}
+        <div
+          className="absolute inset-0 overflow-hidden"
+          style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+        >
+          <img
+            src={item.before}
+            alt={`${item.title} - Before`}
+            className="absolute inset-0 w-full h-full object-cover"
+            draggable={false}
+          />
+        </div>
+
+        {/* Slider Line */}
+        <div
+          className="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg z-10"
+          style={{ left: `${sliderPosition}%` }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+            <ChevronLeft className="w-3 h-3 text-muted-foreground -mr-0.5" />
+            <ChevronRight className="w-3 h-3 text-muted-foreground -ml-0.5" />
+          </div>
+        </div>
+
+        {/* Labels */}
+        <Badge className="absolute top-2 left-2 bg-destructive text-destructive-foreground text-[10px] md:text-xs pointer-events-none">
+          {t('gallery.before')}
+        </Badge>
+        <Badge className="absolute top-2 right-2 bg-primary text-primary-foreground text-[10px] md:text-xs pointer-events-none">
+          {t('gallery.after')}
+        </Badge>
+      </div>
+      
+      {/* Title */}
+      <div className="p-2 md:p-3 bg-card">
+        <p className="text-xs md:text-sm font-medium text-foreground truncate">{item.title}</p>
+      </div>
+    </div>
+  );
+}
+
+export function GallerySection() {
+  const { t } = useLanguage();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollButtons = () => {
+    if (!scrollContainerRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
+
+  useEffect(() => {
+    checkScrollButtons();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScrollButtons);
+      return () => container.removeEventListener('scroll', checkScrollButtons);
+    }
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = 300;
+    scrollContainerRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <section id="gallery" className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <Badge variant="secondary" className="mb-4">
-            <Images className="w-4 h-4 mr-2" />
+          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('gallery.badge')}
-          </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          </span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-4">
             {t('gallery.title')}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
             {t('gallery.subtitle')}
           </p>
         </motion.div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {galleryItems.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group cursor-pointer"
-              onClick={() => openLightbox(index)}
-            >
-              <div className="relative overflow-hidden rounded-xl shadow-md border border-border">
-                {/* Before Image */}
-                <div className="relative aspect-[4/3]">
-                  <img
-                    src={item.before}
-                    alt={`${item.title} - Before`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  {/* Labels */}
-                  <div className="absolute top-3 left-3 flex gap-2">
-                    <Badge className="bg-destructive text-destructive-foreground text-xs">
-                      {t('gallery.before')}
-                    </Badge>
-                  </div>
-                  <div className="absolute top-3 right-3">
-                    <Badge className="bg-primary text-primary-foreground text-xs">
-                      {t('gallery.after')}
-                    </Badge>
-                  </div>
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Buttons - Desktop only */}
+          <button
+            onClick={() => scroll('left')}
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-10 h-10 bg-card shadow-lg rounded-full border border-border transition-opacity ${
+              canScrollLeft ? 'opacity-100 hover:bg-muted' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5 text-foreground" />
+          </button>
+          <button
+            onClick={() => scroll('right')}
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-10 h-10 bg-card shadow-lg rounded-full border border-border transition-opacity ${
+              canScrollRight ? 'opacity-100 hover:bg-muted' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <ChevronRight className="w-5 h-5 text-foreground" />
+          </button>
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="bg-background/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg">
-                      <p className="text-sm font-medium text-foreground">{t('gallery.click.view')}</p>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Title */}
-                <div className="p-3 bg-card">
-                  <p className="text-sm font-medium text-foreground truncate">{item.title}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+          {/* Horizontal Scroll Container */}
+          <div
+            ref={scrollContainerRef}
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:px-8"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {galleryItems.map((item, index) => (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex-shrink-0 w-[280px] md:w-[350px] lg:w-[400px] snap-center"
+              >
+                <BeforeAfterCard item={item} t={t} />
+              </motion.div>
+            ))}
+          </div>
         </div>
 
-        {/* Lightbox Dialog */}
-        <Dialog open={lightboxOpen} onOpenChange={setLightboxOpen}>
-          <DialogContent className="max-w-4xl w-full p-0 bg-black/95 border-none">
-            <div className="relative">
-              {/* Close Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="absolute top-4 right-4 z-50 text-white hover:bg-white/20"
-                onClick={closeLightbox}
-              >
-                <X className="w-6 h-6" />
-              </Button>
-
-              {/* Image Container */}
-              <div className="relative aspect-[4/3] md:aspect-[16/10]">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={`${currentIndex}-${showAfter ? 'after' : 'before'}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    src={showAfter ? currentItem.after : currentItem.before}
-                    alt={currentItem.title}
-                    className="w-full h-full object-contain"
-                  />
-                </AnimatePresence>
-
-                {/* Navigation Arrows */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12"
-                  onClick={goToPrevious}
-                >
-                  <ChevronLeft className="w-8 h-8" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12"
-                  onClick={goToNext}
-                >
-                  <ChevronRight className="w-8 h-8" />
-                </Button>
-              </div>
-
-              {/* Controls */}
-              <div className="p-4 bg-black/80">
-                <div className="flex items-center justify-between">
-                  <div className="flex gap-2">
-                    <Button
-                      variant={!showAfter ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setShowAfter(false)}
-                      className={!showAfter ? 'bg-destructive hover:bg-destructive/90' : 'border-white/30 text-white hover:bg-white/10'}
-                    >
-                      {t('gallery.before')}
-                    </Button>
-                    <Button
-                      variant={showAfter ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setShowAfter(true)}
-                      className={showAfter ? 'bg-primary hover:bg-primary/90' : 'border-white/30 text-white hover:bg-white/10'}
-                    >
-                      {t('gallery.after')}
-                    </Button>
-                  </div>
-                  <div className="text-white/70 text-sm">
-                    {currentIndex + 1} {t('gallery.of')} {galleryItems.length}
-                  </div>
-                </div>
-                <p className="text-white mt-2 font-medium">{currentItem.title}</p>
-              </div>
-            </div>
-          </DialogContent>
-        </Dialog>
+        {/* Scroll hint for mobile */}
+        <p className="text-center text-xs text-muted-foreground mt-2 md:hidden">
+          ← {t('gallery.badge')} →
+        </p>
       </div>
     </section>
   );
