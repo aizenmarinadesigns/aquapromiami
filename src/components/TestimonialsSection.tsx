@@ -1,4 +1,4 @@
-import { Star, Quote } from 'lucide-react';
+import { Star, Quote, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
@@ -31,33 +31,71 @@ export function TestimonialsSection() {
   ];
 
   return (
-    <section ref={ref} id="testimonios" className="py-20 section-light">
+    <section ref={ref} id="testimonios" className="py-12 md:py-20 section-light">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 md:mb-16"
         >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">
+          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('nav.testimonials')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-3 px-4">
             {t('testimonials.title')}
           </h2>
-          <p className="text-muted-foreground text-lg">
-            {t('testimonials.subtitle')}
+          <p className="text-muted-foreground text-sm md:text-lg flex items-center justify-center gap-2">
+            <Users className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+            <span>{t('testimonials.subtitle')}</span>
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Horizontal scroll on mobile, grid on desktop */}
+        <div className="md:grid md:grid-cols-3 md:gap-8">
+          {/* Mobile horizontal scroll container */}
+          <div className="flex md:hidden gap-4 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 scrollbar-hide">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                className="card-elevated relative flex-shrink-0 w-[280px] snap-center p-4"
+              >
+                <Quote className="absolute top-3 right-3 w-6 h-6 text-primary/20" />
+                
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-foreground text-sm">{testimonial.name}</h4>
+                    <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-0.5 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+
+                <p className="text-muted-foreground leading-relaxed text-sm">
+                  "{testimonial.text}"
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop grid */}
           {testimonials.map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="card-elevated relative"
+              className="card-elevated relative hidden md:block"
             >
               <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
               
