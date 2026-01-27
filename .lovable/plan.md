@@ -1,141 +1,119 @@
 
+
 # Implementation Plan: Service Booking Calendar & Photo Gallery
 
 ## Overview
-This plan adds two new sections to the pool cleaning service landing page:
-1. **Service Booking Calendar** - An interactive calendar where customers can select available time slots
-2. **Photo Gallery** - A before/after showcase with lightbox functionality
+Adding two new interactive sections to the pool cleaning service landing page:
+1. **Service Booking Calendar** - Date and time slot selection with WhatsApp confirmation
+2. **Photo Gallery** - Before/after showcase with lightbox viewer
 
-Both sections will follow the existing bilingual (ES/EN) pattern, use Framer Motion animations, and match the established design system.
+Both sections will use the established bilingual (ES/EN) pattern, Framer Motion animations, and match the existing design system.
 
 ---
 
 ## Feature 1: Service Booking Calendar
 
-### What It Does
-Customers can:
-- View a calendar showing the current month
-- Select a date to see available time slots
-- Pick a time slot (morning/afternoon windows)
-- See their selection confirmed
-- Proceed to contact or WhatsApp with pre-filled booking info
+### What Customers Can Do
+- View an interactive monthly calendar
+- Select an available date (weekdays only)
+- Choose from 4 time slots (morning/afternoon)
+- Confirm booking via WhatsApp with pre-filled details
 
-### User Experience
-1. User sees the calendar section with today's date highlighted
-2. Clicking a date reveals available time slots (8am-10am, 10am-12pm, 1pm-3pm, 3pm-5pm)
-3. Weekends and past dates are disabled
-4. Selected slot shows confirmation with option to contact via WhatsApp or phone
+### User Flow
+```text
+See Calendar -> Select Date -> See Time Slots -> Pick Time -> Confirm via WhatsApp
+```
 
-### Files to Create/Modify
-| File | Action | Purpose |
-|------|--------|---------|
-| `src/components/BookingSection.tsx` | Create | Main booking calendar component |
+### Files to Modify/Create
+
+| File | Action | Description |
+|------|--------|-------------|
+| `src/components/BookingSection.tsx` | Create | Main booking component with calendar and time slots |
 | `src/contexts/LanguageContext.tsx` | Modify | Add booking-related translations |
-| `src/pages/Index.tsx` | Modify | Add BookingSection to the page |
+| `src/pages/Index.tsx` | Modify | Add BookingSection after Pricing |
 
-### Technical Approach
-- Use the existing `Calendar` component from shadcn/ui
-- Create time slot selection with radio buttons styled as cards
-- Store selected date/time in component state
-- Generate WhatsApp link with pre-filled booking details
-- Disable unavailable dates (past dates, weekends)
+### Component Structure
+- Uses existing shadcn/ui `Calendar` component
+- Time slots displayed as clickable cards
+- Responsive layout: side-by-side on desktop, stacked on mobile
+- WhatsApp CTA generates pre-filled booking message
+
+### Technical Details
+- Calendar disables: past dates, weekends
+- Time slots: 8-10 AM, 10 AM-12 PM, 1-3 PM, 3-5 PM
+- State management: `selectedDate`, `selectedTimeSlot`
+- WhatsApp message includes: date, time, service type
 
 ---
 
 ## Feature 2: Photo Gallery with Lightbox
 
-### What It Does
-- Display a grid of before/after pool transformation images
-- Interactive lightbox for full-screen viewing
-- Navigation between images in lightbox
-- Keyboard support (arrow keys, escape to close)
+### What Customers Can Do
+- Browse a grid of before/after pool transformations
+- Click any image to open full-screen lightbox
+- Navigate between images using arrows or keyboard
+- See image counter (e.g., "3 of 8")
 
-### User Experience
-1. User sees a responsive grid of before/after image pairs
-2. Clicking any image opens a lightbox overlay
-3. In lightbox: navigation arrows, close button, image counter
-4. Can navigate with keyboard or touch gestures on mobile
+### Files to Modify/Create
 
-### Files to Create/Modify
-| File | Action | Purpose |
-|------|--------|---------|
-| `src/components/GallerySection.tsx` | Create | Gallery grid and lightbox component |
+| File | Action | Description |
+|------|--------|-------------|
+| `src/components/GallerySection.tsx` | Create | Gallery grid with lightbox functionality |
 | `src/contexts/LanguageContext.tsx` | Modify | Add gallery-related translations |
-| `src/pages/Index.tsx` | Modify | Add GallerySection to the page |
+| `src/pages/Index.tsx` | Modify | Add GallerySection after Services |
 
-### Technical Approach
-- Use existing Dialog component from shadcn/ui as lightbox base
-- Create responsive image grid (2 cols mobile, 3-4 cols desktop)
-- Each gallery item shows before/after with subtle label overlay
-- Lightbox includes:
-  - Full-screen image view
-  - Previous/Next navigation
-  - Close button
-  - Image counter (e.g., "3 of 8")
-  - Keyboard event listeners
+### Component Structure
+- Responsive grid: 2 columns mobile, 3-4 columns desktop
+- Before/After labels as badges on images
+- Lightbox built with shadcn/ui `Dialog`
+- Keyboard support (arrow keys, Escape)
+
+### Technical Details
+- Uses placeholder images initially (can be replaced with real photos)
+- Smooth hover zoom effect on grid items
+- Dark overlay (black/80) for lightbox
+- Touch-friendly navigation for mobile
 
 ---
 
 ## Translations to Add
 
-### Spanish (ES)
-```
-booking.title: "Reserve Su Cita"
-booking.subtitle: "Seleccione una fecha y hora disponible"
-booking.select.date: "Seleccione una fecha"
-booking.select.time: "Horarios disponibles"
-booking.morning.1: "8:00 AM - 10:00 AM"
-booking.morning.2: "10:00 AM - 12:00 PM"
-booking.afternoon.1: "1:00 PM - 3:00 PM"
-booking.afternoon.2: "3:00 PM - 5:00 PM"
-booking.confirm: "Confirmar Reserva por WhatsApp"
-booking.selected: "Ha seleccionado"
-booking.unavailable: "No disponible"
-booking.weekend: "No trabajamos fines de semana"
+### Booking Section (Spanish)
+- Reserve Su Cita
+- Seleccione una fecha y hora disponible
+- Horarios disponibles
+- 8:00 AM - 10:00 AM, 10:00 AM - 12:00 PM, 1:00 PM - 3:00 PM, 3:00 PM - 5:00 PM
+- Confirmar Reserva por WhatsApp
+- No trabajamos fines de semana
 
-gallery.title: "Transformaciones Reales"
-gallery.subtitle: "Vea el antes y después de nuestro trabajo"
-gallery.before: "Antes"
-gallery.after: "Después"
-gallery.close: "Cerrar"
-gallery.of: "de"
-```
+### Booking Section (English)
+- Book Your Appointment
+- Select an available date and time
+- Available time slots
+- (Same time slots as Spanish)
+- Confirm Booking via WhatsApp
+- We don't work weekends
 
-### English (EN)
-```
-booking.title: "Book Your Appointment"
-booking.subtitle: "Select an available date and time"
-booking.select.date: "Select a date"
-booking.select.time: "Available time slots"
-booking.morning.1: "8:00 AM - 10:00 AM"
-booking.morning.2: "10:00 AM - 12:00 PM"
-booking.afternoon.1: "1:00 PM - 3:00 PM"
-booking.afternoon.2: "3:00 PM - 5:00 PM"
-booking.confirm: "Confirm Booking via WhatsApp"
-booking.selected: "You selected"
-booking.unavailable: "Not available"
-booking.weekend: "We don't work weekends"
-
-gallery.title: "Real Transformations"
-gallery.subtitle: "See the before and after of our work"
-gallery.before: "Before"
-gallery.after: "After"
-gallery.close: "Close"
-gallery.of: "of"
-```
+### Gallery Section (Spanish/English)
+- Transformaciones Reales / Real Transformations
+- Antes / Before
+- Despues / After
+- Cerrar / Close
+- de / of (for counter)
 
 ---
 
-## Page Structure Update
+## Updated Page Structure
 
-The sections will be added to `Index.tsx` in this order:
+The sections will appear in this order in `Index.tsx`:
+
 1. Hero
 2. Problems
 3. Services
-4. **Gallery** (new) - Shows work quality after describing services
+4. **Gallery** (new) - Shows work quality after services
 5. Testimonials
 6. Pricing
-7. **Booking** (new) - Natural flow after seeing pricing
+7. **Booking** (new) - Natural flow after pricing
 8. About
 9. Guarantees
 10. FAQ
@@ -146,38 +124,44 @@ The sections will be added to `Index.tsx` in this order:
 
 ---
 
-## Design Details
+## Design Specifications
 
 ### Booking Calendar
-- Clean card layout with calendar on left, time slots on right (desktop)
-- Stack vertically on mobile
+- Clean card layout with `card-elevated` class
 - Primary color for selected date
-- Coral accent for "Confirm" CTA
-- Disabled dates in muted gray
-- Smooth hover transitions on time slots
+- Coral accent (`bg-accent`) for confirm button
+- Disabled dates shown in muted gray
+- Time slot cards with hover scale effect (1.05)
+- Selected slot highlighted with primary border
 
-### Gallery
-- Masonry-style grid with hover zoom effect
-- Before/After labels as small badges on images
-- Lightbox with dark overlay (black/80)
-- Smooth fade-in animations
-- Touch-friendly on mobile (swipe to navigate)
+### Gallery Grid
+- Hover zoom effect using `group-hover:scale-105`
+- Before/After badges using `Badge` component
+- Lightbox with dark overlay and white navigation arrows
+- Smooth fade animations on open/close
+- Touch swipe support on mobile
 
 ---
 
-## Implementation Checklist
+## Implementation Steps
 
-1. Add all translations to LanguageContext
-2. Create BookingSection.tsx with:
-   - Calendar integration
-   - Time slot selection
-   - WhatsApp booking link generation
-   - Responsive layout
-3. Create GallerySection.tsx with:
-   - Image grid with placeholder images
-   - Lightbox functionality using Dialog
-   - Keyboard navigation
-   - Before/After labels
-4. Update Index.tsx to include new sections
-5. Test bilingual switching
-6. Verify responsive behavior
+1. **Add translations** to LanguageContext (20+ new translation keys)
+2. **Create BookingSection.tsx**:
+   - Import Calendar, Card components
+   - Implement date selection with disabled weekends/past dates
+   - Build time slot selector with card-style buttons
+   - Generate WhatsApp booking link
+   - Add Framer Motion animations matching other sections
+3. **Create GallerySection.tsx**:
+   - Build responsive image grid
+   - Implement lightbox with Dialog component
+   - Add keyboard event listeners (arrows, escape)
+   - Add before/after label badges
+   - Add hover effects and animations
+4. **Update Index.tsx**:
+   - Import new components
+   - Place Gallery after Services
+   - Place Booking after Pricing
+5. **Test both language modes** (ES/EN switching)
+6. **Verify responsive behavior** on mobile/tablet/desktop
+
