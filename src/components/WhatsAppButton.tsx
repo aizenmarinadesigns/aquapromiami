@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export function WhatsAppButton() {
   const { t } = useLanguage();
   
-  const whatsappNumber = '13051234567';
+  const whatsappNumber = '34623282101';
   const whatsappMessage = encodeURIComponent(t('whatsapp.message'));
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
