@@ -6,7 +6,7 @@ import heroImage from '@/assets/hero-pool.jpg';
 export function HeroSection() {
   const { t } = useLanguage();
 
-  const whatsappNumber = '13051234567';
+  const whatsappNumber = '34623282101';
   const whatsappMessage = encodeURIComponent(t('whatsapp.message'));
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -58,7 +58,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-8 md:mb-12 px-4"
           >
             <a
-              href="tel:+13051234567"
+              href="tel:+34623282101"
               className="btn-coral inline-flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 py-3 md:py-4"
             >
               <Phone className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />

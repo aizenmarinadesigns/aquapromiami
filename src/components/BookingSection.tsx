@@ -43,7 +43,7 @@ export function BookingSection() {
       ? `Hola! Quiero reservar una cita para servicio de piscina:\n📅 Fecha: ${formattedDate}\n⏰ Horario: ${slotText}\n\nPor favor confirmen disponibilidad.`
       : `Hi! I want to book a pool service appointment:\n📅 Date: ${formattedDate}\n⏰ Time: ${slotText}\n\nPlease confirm availability.`;
     
-    return `https://wa.me/13055551234?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/34623282101?text=${encodeURIComponent(message)}`;
   };
 
   return (
@@ -150,7 +150,7 @@ export function BookingSection() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-border"
+                  className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-border bg-card rounded-lg"
                 >
                   <div className="text-center">
                     <p className="text-foreground mb-3 md:mb-4 text-sm md:text-base">
@@ -166,7 +166,6 @@ export function BookingSection() {
                       className="btn-whatsapp text-sm md:text-base px-6 md:px-8"
                     >
                       <a href={generateWhatsAppLink()} target="_blank" rel="noopener noreferrer">
-                        <MessageCircle className="w-4 h-4 md:w-5 md:h-5 mr-2" />
                         {t('booking.confirm')}
                       </a>
                     </Button>

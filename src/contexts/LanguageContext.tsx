@@ -139,7 +139,8 @@ const translations: Record<string, Record<Language, string>> = {
   'guarantees.4.desc': { es: 'Asignamos un técnico dedicado a su piscina. Conocerá su equipo, su piscina y sus preferencias.', en: 'We assign a dedicated technician to your pool. They\'ll know your equipment, your pool, and your preferences.' },
 
   // FAQ
-  'faq.title': { es: 'Preguntas Que Nuestros Clientes Hacen Antes de Contratar', en: 'Questions Our Clients Ask Before Hiring' },
+  'faq.title': { es: 'Preguntas Frecuentes', en: 'Frequently Asked Questions' },
+  'faq.subtitle': { es: 'Respondemos las dudas más comunes de nuestros clientes', en: 'We answer the most common questions from our clients' },
   'faq.1.q': { es: '¿Qué pasa si mi piscina está verde cuando empiezan?', en: 'What if my pool is green when you start?' },
   'faq.1.a': { es: 'No hay problema. Hacemos una recuperación inicial (puede tener costo adicional según el estado) y luego mantenemos el servicio regular. La recuperación típica toma 3-5 días.', en: 'No problem. We do an initial recovery (may have additional cost depending on condition) and then maintain regular service. Typical recovery takes 3-5 days.' },
   'faq.2.q': { es: '¿Incluyen los químicos en el precio?', en: 'Are chemicals included in the price?' },
@@ -158,7 +159,8 @@ const translations: Record<string, Record<Language, string>> = {
   'faq.8.a': { es: 'Ofrecemos servicio mes a mes sin contrato de largo plazo. Puede cancelar cuando quiera con aviso de 2 semanas.', en: 'We offer month-to-month service with no long-term contract. You can cancel anytime with 2 weeks notice.' },
 
   // Service Areas
-  'areas.title': { es: 'Servimos Estas Áreas de Miami-Dade', en: 'We Serve These Miami-Dade Areas' },
+  'areas.title': { es: 'Áreas de Servicio', en: 'Service Areas' },
+  'areas.subtitle': { es: 'Cubrimos todo Miami-Dade con servicio profesional', en: 'We cover all of Miami-Dade with professional service' },
   'areas.west': { es: 'Zona Oeste', en: 'West Zone' },
   'areas.west.list': { es: 'Doral|Sweetwater|Fontainebleau|Tamiami|Westchester', en: 'Doral|Sweetwater|Fontainebleau|Tamiami|Westchester' },
   'areas.south': { es: 'Zona Sur', en: 'South Zone' },

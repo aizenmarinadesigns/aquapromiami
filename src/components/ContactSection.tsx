@@ -27,7 +27,7 @@ export function ContactSection() {
     message: '',
   });
 
-  const whatsappNumber = '13051234567';
+  const whatsappNumber = '34623282101';
   const whatsappMessage = encodeURIComponent(t('whatsapp.message'));
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
@@ -218,14 +218,14 @@ export function ContactSection() {
 
             <div className="space-y-3 md:space-y-4">
               <a
-                href="tel:+13051234567"
+                href="tel:+34623282101"
                 className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors flex-shrink-0">
                   <Phone className="w-5 h-5 md:w-6 md:h-6 text-accent" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-bold text-foreground text-sm md:text-base">(305) 123-4567</p>
+                  <p className="font-bold text-foreground text-sm md:text-base">+34 623 282 101</p>
                   <p className="text-xs md:text-sm text-muted-foreground truncate">{t('hero.cta.call')}</p>
                 </div>
               </a>
@@ -246,14 +246,14 @@ export function ContactSection() {
               </a>
 
               <a
-                href="mailto:info@aquapromiami.com"
+                href="mailto:aizen.marina.designs@gmail.com"
                 className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
                 <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
                   <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-bold text-foreground text-sm md:text-base break-all">info@aquapromiami.com</p>
+                  <p className="font-bold text-foreground text-sm md:text-base break-all">aizen.marina.designs@gmail.com</p>
                   <p className="text-xs md:text-sm text-muted-foreground">Email</p>
                 </div>
               </a>

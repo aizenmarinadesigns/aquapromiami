@@ -2,12 +2,13 @@ import { Star, Quote, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export function TestimonialsSection() {
   const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const testimonials = [
     {
@@ -45,7 +46,7 @@ export function TestimonialsSection() {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-3 px-4">
             {t('testimonials.title')}
           </h2>
-          <p className="text-muted-foreground text-sm md:text-lg flex items-center justify-center gap-2">
+          <p className="text-muted-foreground text-sm md:text-lg flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
             <Users className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
             <span>{t('testimonials.subtitle')}</span>
           </p>
@@ -54,19 +55,22 @@ export function TestimonialsSection() {
         {/* Horizontal scroll on mobile, grid on desktop */}
         <div className="md:grid md:grid-cols-3 md:gap-8">
           {/* Mobile horizontal scroll container */}
-          <div className="flex md:hidden gap-4 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4 scrollbar-hide">
+          <div className="flex md:hidden gap-4 overflow-x-auto pb-6 snap-x snap-mandatory -mx-4 px-4 scrollbar-hide">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="card-elevated relative flex-shrink-0 w-[280px] snap-center p-4"
+                onViewportEnter={() => setActiveCard(index)}
+                className={`card-elevated relative flex-shrink-0 w-[280px] snap-center p-5 my-2 transition-all duration-300 ${
+                  activeCard === index ? 'shadow-lg ring-2 ring-primary/20 scale-[1.02]' : ''
+                }`}
               >
-                <Quote className="absolute top-3 right-3 w-6 h-6 text-primary/20" />
+                <Quote className="absolute top-4 right-4 w-6 h-6 text-primary/20" />
                 
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-secondary-foreground font-bold text-sm">
                     {testimonial.initials}
                   </div>
                   <div>
@@ -75,7 +79,7 @@ export function TestimonialsSection() {
                   </div>
                 </div>
 
-                <div className="flex gap-0.5 mb-3">
+                <div className="flex gap-0.5 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                   ))}
@@ -95,7 +99,7 @@ export function TestimonialsSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="card-elevated relative hidden md:block"
+              className="card-elevated relative hidden md:block hover:shadow-lg hover:ring-2 hover:ring-primary/20 transition-all duration-300"
             >
               <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
               

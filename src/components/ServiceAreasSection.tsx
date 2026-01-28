@@ -28,9 +28,12 @@ export function ServiceAreasSection() {
           <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('footer.areas')}
           </span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-3">
             {t('areas.title')}
           </h2>
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto px-4">
+            {t('areas.subtitle')}
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-5xl mx-auto">

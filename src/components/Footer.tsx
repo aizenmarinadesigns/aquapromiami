@@ -56,11 +56,11 @@ export function Footer() {
             <ul className="space-y-2 md:space-y-3 text-secondary-foreground/70 text-xs md:text-sm">
               <li className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                <a href="tel:+13051234567" className="hover:text-primary transition-colors">(305) 123-4567</a>
+                <a href="tel:+34623282101" className="hover:text-primary transition-colors">+34 623 282 101</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0" />
-                <a href="mailto:info@aquapromiami.com" className="hover:text-primary transition-colors break-all">info@aquapromiami.com</a>
+                <a href="mailto:aizen.marina.designs@gmail.com" className="hover:text-primary transition-colors break-all">aizen.marina.designs@gmail.com</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0 mt-0.5" />
