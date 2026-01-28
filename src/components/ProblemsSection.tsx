@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 export function ProblemsSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -57,7 +57,7 @@ export function ProblemsSection() {
           <p className="text-sm md:text-lg text-muted-foreground mb-4 md:mb-6 max-w-2xl mx-auto px-4">
             {t('problems.transition')}
           </p>
-          <a href="#servicios" className="btn-coral inline-block text-sm md:text-base px-6 md:px-8 py-3 md:py-4">
+          <a href={language === 'es' ? '#servicios' : '#services'} className="btn-coral inline-block text-sm md:text-base px-6 md:px-8 py-3 md:py-4">
             {t('problems.cta')}
           </a>
         </motion.div>

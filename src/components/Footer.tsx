@@ -2,7 +2,9 @@ import { Droplets, Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export function Footer() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  
+  const servicesHref = language === 'es' ? '#servicios' : '#services';
 
   return (
     <footer className="bg-pool-dark text-secondary-foreground py-12 md:py-16">
@@ -33,9 +35,9 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-3 md:mb-4 text-sm md:text-base">{t('footer.services')}</h4>
             <ul className="space-y-1.5 md:space-y-2 text-secondary-foreground/70 text-xs md:text-sm">
-              <li><a href="#servicios" className="hover:text-primary transition-colors">{t('contact.service.weekly')}</a></li>
-              <li><a href="#servicios" className="hover:text-primary transition-colors">{t('contact.service.repair')}</a></li>
-              <li><a href="#servicios" className="hover:text-primary transition-colors">{t('contact.service.recovery')}</a></li>
+              <li><a href={servicesHref} className="hover:text-primary transition-colors">{t('contact.service.weekly')}</a></li>
+              <li><a href={servicesHref} className="hover:text-primary transition-colors">{t('contact.service.repair')}</a></li>
+              <li><a href={servicesHref} className="hover:text-primary transition-colors">{t('contact.service.recovery')}</a></li>
             </ul>
           </div>
 

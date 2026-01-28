@@ -13,7 +13,7 @@ const cities = [
 ];
 
 export function ContactSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -48,8 +48,10 @@ export function ContactSection() {
     }, 5000);
   };
 
+  const sectionId = language === 'es' ? 'contacto' : 'contact';
+
   return (
-    <section ref={ref} id="contacto" className="py-12 md:py-20 bg-background">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 export function GuaranteesSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -16,8 +16,10 @@ export function GuaranteesSection() {
     { icon: UserCheck, title: t('guarantees.4.title'), desc: t('guarantees.4.desc'), color: 'from-secondary to-secondary/70' },
   ];
 
+  const sectionId = language === 'es' ? 'garantias' : 'guarantees';
+
   return (
-    <section ref={ref} id="garantias" className="py-12 md:py-20 bg-secondary">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-secondary">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

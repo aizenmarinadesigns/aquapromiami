@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 export function PricingSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -30,8 +30,10 @@ export function PricingSection() {
     },
   ];
 
+  const sectionId = language === 'es' ? 'precios' : 'pricing';
+
   return (
-    <section ref={ref} id="precios" className="py-12 md:py-20 bg-background">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -93,7 +95,7 @@ export function PricingSection() {
               </ul>
 
               <a
-                href="#contacto"
+                href={language === 'es' ? '#contacto' : '#contact'}
                 className={`block w-full py-2.5 md:py-3 px-4 md:px-6 rounded-lg md:rounded-xl font-semibold text-center transition-all duration-300 hover:scale-105 text-sm md:text-base ${
                   plan.popular
                     ? 'bg-accent text-accent-foreground shadow-lg hover:shadow-xl'
