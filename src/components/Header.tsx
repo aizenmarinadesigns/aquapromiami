@@ -15,11 +15,11 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { href: '#servicios', label: t('nav.services') },
-    { href: '#testimonios', label: t('nav.testimonials') },
-    { href: '#precios', label: t('nav.pricing') },
-    { href: '#garantias', label: t('nav.guarantees') },
-    { href: '#contacto', label: t('nav.contact') },
+    { href: language === 'es' ? '#servicios' : '#services', label: t('nav.services') },
+    { href: language === 'es' ? '#testimonios' : '#testimonials', label: t('nav.testimonials') },
+    { href: language === 'es' ? '#precios' : '#pricing', label: t('nav.pricing') },
+    { href: language === 'es' ? '#garantias' : '#guarantees', label: t('nav.guarantees') },
+    { href: language === 'es' ? '#contacto' : '#contact', label: t('nav.contact') },
   ];
 
   const scrollToTop = () => {

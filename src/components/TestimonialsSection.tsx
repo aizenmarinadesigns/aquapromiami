@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 
 export function TestimonialsSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -31,8 +31,10 @@ export function TestimonialsSection() {
     },
   ];
 
+  const sectionId = language === 'es' ? 'testimonios' : 'testimonials';
+
   return (
-    <section ref={ref} id="testimonios" className="py-12 md:py-20 section-light">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

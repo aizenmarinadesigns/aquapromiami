@@ -5,7 +5,7 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 export function ServicesSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -36,8 +36,10 @@ export function ServicesSection() {
     },
   ];
 
+  const sectionId = language === 'es' ? 'servicios' : 'services';
+
   return (
-    <section ref={ref} id="servicios" className="py-12 md:py-20 bg-background">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
