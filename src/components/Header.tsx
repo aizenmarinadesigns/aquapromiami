@@ -90,7 +90,17 @@ export function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+             onClick={(e) => {
+  e.preventDefault(); // Evita que el navegador salte de golpe
+  const targetId = link.href.replace('#', ''); // Quita el '#' para buscar el ID
+  const element = document.getElementById(targetId); // Busca la sección
+  
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' }); // Hace el scroll suave
+  }
+  
+  setIsMobileMenuOpen(false); // Cierra el menú después de iniciar el movimiento
+}}
               className={`lg:hidden p-2 rounded-lg ${
                 isScrolled ? 'text-foreground' : 'text-secondary-foreground'
               }`}
