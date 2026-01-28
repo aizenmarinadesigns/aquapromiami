@@ -89,24 +89,15 @@ export function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-             onClick={(e) => {
-  e.preventDefault(); // Evita que el navegador salte de golpe
-  const targetId = link.href.replace('#', ''); // Quita el '#' para buscar el ID
-  const element = document.getElementById(targetId); // Busca la sección
-  
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' }); // Hace el scroll suave
-  }
-  
-  setIsMobileMenuOpen(false); // Cierra el menú después de iniciar el movimiento
-}}
-              className={`lg:hidden p-2 rounded-lg ${
-                isScrolled ? 'text-foreground' : 'text-secondary-foreground'
-              }`}
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
-            </button>
+            {/* Mobile Menu Button */}
+<button
+  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+  className={`lg:hidden p-2 rounded-lg ${
+    isScrolled ? 'text-foreground' : 'text-secondary-foreground'
+  }`}
+>
+  {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+</button>
           </div>
         </div>
       </div>
@@ -125,7 +116,17 @@ export function Header() {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => {
+  e.preventDefault(); // Detiene el salto brusco para que podamos controlarlo 🛑
+  const targetId = link.href.replace('#', ''); // Limpia el '#' para obtener el ID real 🆔
+  const element = document.getElementById(targetId); // Busca la sección en la página 🔍
+  
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave y elegante 🌊
+  }
+  
+  setIsMobileMenuOpen(false); // Finalmente, cierra el menú 🚪
+}}
                   className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
                 >
                   {link.label}
