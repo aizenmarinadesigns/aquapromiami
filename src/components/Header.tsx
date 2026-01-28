@@ -117,20 +117,23 @@ export function Header() {
   key={link.href}
   href={link.href}
   onClick={(e) => {
-    e.preventDefault(); // Evita que la página "salte" de golpe 🛑
+  e.preventDefault(); // Detiene el salto brusco 🛑
+  
+  // 1. Identifica a dónde ir (ej: 'servicios')
+  const targetId = link.href.replace('#', '');
+  const element = document.getElementById(targetId);
+  
+  if (element) {
+    // 2. Primero le pedimos que cierre el menú 🚪
+    setIsMobileMenuOpen(false);
     
-    // Obtenemos el ID de la sección (ej: 'servicios')
-    const targetId = link.href.replace('#', '');
-    const element = document.getElementById(targetId);
-    
-    if (element) {
-      // 1. Movemos la pantalla suavemente hacia la sección 🌊
+    // 3. Le damos un mini respiro (100ms) para que el cierre no trabe el movimiento
+    // y luego hacemos el scroll suave 🌊
+    setTimeout(() => {
       element.scrollIntoView({ behavior: 'smooth' });
-      
-      // 2. Cerramos el menú móvil para que no tape la vista 🚪
-      setIsMobileMenuOpen(false);
-    }
-  }}
+    }, 100);
+  }
+}}
   className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
 >
   {link.label}
