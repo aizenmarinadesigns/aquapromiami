@@ -114,23 +114,27 @@ export function Header() {
             <nav className="container mx-auto px-4 py-3 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-  e.preventDefault(); // Detiene el salto brusco para que podamos controlarlo 🛑
-  const targetId = link.href.replace('#', ''); // Limpia el '#' para obtener el ID real 🆔
-  const element = document.getElementById(targetId); // Busca la sección en la página 🔍
-  
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' }); // Desplazamiento suave y elegante 🌊
-  }
-  
-  setIsMobileMenuOpen(false); // Finalmente, cierra el menú 🚪
-}}
-                  className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
-                >
-                  {link.label}
-                </a>
+  key={link.href}
+  href={link.href}
+  onClick={(e) => {
+    e.preventDefault(); // Evita que la página "salte" de golpe 🛑
+    
+    // Obtenemos el ID de la sección (ej: 'servicios')
+    const targetId = link.href.replace('#', '');
+    const element = document.getElementById(targetId);
+    
+    if (element) {
+      // 1. Movemos la pantalla suavemente hacia la sección 🌊
+      element.scrollIntoView({ behavior: 'smooth' });
+      
+      // 2. Cerramos el menú móvil para que no tape la vista 🚪
+      setIsMobileMenuOpen(false);
+    }
+  }}
+  className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
+>
+  {link.label}
+</a>
               ))}
             </nav>
           </motion.div>
