@@ -136,12 +136,12 @@
   /* Scroll offset for sticky header */
  /* Forzamos el margen de scroll para que el título respire */
 section[id] {
-  scroll-margin-top: 70px !important; /* Vamos con 60 y usamos !important para ganar la pelea */
+  scroll-margin-top: 70px; /* Vamos con 70 */
 }
 
 @media (min-width: 768px) {
   section[id] {
-    scroll-margin-top: 90px !important;
+    scroll-margin-top: 90px;
   }
 }
 }
