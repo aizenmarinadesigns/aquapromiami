@@ -134,9 +134,9 @@
   }
 
   /* Scroll offset for sticky header */
- /* Forzamos el margen de scroll para que el título respire */
 section[id] {
-  scroll-margin-top: 70px; /* Vamos con 70 */
+  scroll-padding-top: 70px; /* Usamos PADDING, no margin, es más estable para el sticky header */
+  scroll-margin-top: 0 !important; 
 }
 
 @media (min-width: 768px) {
