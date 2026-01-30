@@ -134,14 +134,16 @@
   }
 
   /* Scroll offset for sticky header */
-  /* Ajuste adaptativo: menos espacio en móvil, más en escritorio */
+ /* Ajuste de scroll para que el Header no tape los títulos */
 section[id] {
-  scroll-margin-top: 70px; /* Para móviles 📱 */
+  /* En móviles le damos un poco más de aire (100px) */
+  scroll-margin-top: 100px; 
 }
 
 @media (min-width: 768px) {
   section[id] {
-    scroll-margin-top: 90px; /* Para tablets y pc 💻 */
+    /* En escritorio, donde el espacio rinde más, podemos dejarlo en 80px o 90px */
+    scroll-margin-top: 80px;
   }
 }
 }
