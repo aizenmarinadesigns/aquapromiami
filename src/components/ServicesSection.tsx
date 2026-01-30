@@ -39,7 +39,7 @@ export function ServicesSection() {
   const sectionId = language === 'es' ? 'servicios' : 'services';
 
   return (
-    <section ref={ref} id={sectionId} className="pt-28 pb-12 md:pt-32 md:pb-20 bg-background">
+    <section ref={ref} id={sectionId} className="pt-20 pb-12 md:pt-32 md:pb-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
