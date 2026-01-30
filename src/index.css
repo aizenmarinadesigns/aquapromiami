@@ -134,16 +134,14 @@
   }
 
   /* Scroll offset for sticky header */
- /* Ajuste de scroll para que el Header no tape los títulos */
+ /* Forzamos el margen de scroll para que el título respire */
 section[id] {
-  /* En móviles le damos un poco más de aire (100px) */
-  scroll-margin-top: 100px; 
+  scroll-margin-top: 120px !important; /* Subimos a 120 y usamos !important para ganar la pelea */
 }
 
 @media (min-width: 768px) {
   section[id] {
-    /* En escritorio, donde el espacio rinde más, podemos dejarlo en 80px o 90px */
-    scroll-margin-top: 80px;
+    scroll-margin-top: 90px !important;
   }
 }
 }
