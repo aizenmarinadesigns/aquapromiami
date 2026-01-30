@@ -134,9 +134,16 @@
   }
 
   /* Scroll offset for sticky header */
+  /* Ajuste adaptativo: menos espacio en móvil, más en escritorio */
+section[id] {
+  scroll-margin-top: 70px; /* Para móviles 📱 */
+}
+
+@media (min-width: 768px) {
   section[id] {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 90px; /* Para tablets y pc 💻 */
   }
+}
 }
 
 @layer components {
