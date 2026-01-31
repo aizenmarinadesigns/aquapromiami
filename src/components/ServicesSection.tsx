@@ -65,6 +65,7 @@ export function ServicesSection() {
               className="card-elevated group p-4 md:p-6"
             >
               <div className="flex items-start gap-3 md:gap-4">
+                {/* Este className tenía un backtick de apertura faltante en el original */}
                 <div className={`w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                   <service.icon className="w-5 h-5 md:w-7 md:h-7 text-secondary-foreground" />
                 </div>
