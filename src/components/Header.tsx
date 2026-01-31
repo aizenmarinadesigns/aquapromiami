@@ -3,6 +3,15 @@ import { Menu, X, Droplets } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Altura del navbar en px, matcheada con las clases de Tailwind del header:
+//   mobile  → h-16 = 64px
+//   desktop → h-20 = 80px
+// Usamos una función que mide el elemento real así no tenemos que hardcodear.
+function getNavbarHeight(): number {
+  const header = document.querySelector('header');
+  return header ? header.offsetHeight : 64;
+}
+
 export function Header() {
   const { language, setLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,12 +27,32 @@ export function Header() {
     { href: language === 'es' ? '#servicios' : '#services', label: t('nav.services') },
     { href: language === 'es' ? '#testimonios' : '#testimonials', label: t('nav.testimonials') },
     { href: language === 'es' ? '#precios' : '#pricing', label: t('nav.pricing') },
-    { href: language === 'es' ? '#garantias' : '#guarantees', label: t('nav.guarantees') },
+    { href: language === 'es' ? '#garantias' : '#guarantees', label: t('nav.contacto') },
     { href: language === 'es' ? '#contacto' : '#contact', label: t('nav.contact') },
   ];
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Función reutilizable para hacer scroll a cualquier sección
+  // descontando la altura del navbar fijo.
+  const scrollToSection = (href: string) => {
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const navbarHeight = getNavbarHeight();
+      // getBoundingClientRect().top es relativo al viewport actual,
+      // sumamos window.scrollY para convertirlo a posición absoluta en la página.
+      const targetPosition =
+        element.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
@@ -53,6 +82,10 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToSection(link.href);
+                }}
                 className={`font-medium transition-colors hover:text-primary ${
                   isScrolled ? 'text-foreground' : 'text-secondary-foreground'
                 }`}
@@ -64,7 +97,7 @@ export function Header() {
 
           {/* Language Switcher + Mobile Menu */}
           <div className="flex items-center gap-2 md:gap-4">
-            {/* Language Toggle - No flags, smaller on mobile */}
+            {/* Language Toggle */}
             <div className="flex items-center bg-muted rounded-full p-0.5 md:p-1">
               <button
                 onClick={() => setLanguage('es')}
@@ -89,15 +122,14 @@ export function Header() {
             </div>
 
             {/* Mobile Menu Button */}
-            {/* Mobile Menu Button */}
-<button
-  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-  className={`lg:hidden p-2 rounded-lg ${
-    isScrolled ? 'text-foreground' : 'text-secondary-foreground'
-  }`}
->
-  {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
-</button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`lg:hidden p-2 rounded-lg ${
+                isScrolled ? 'text-foreground' : 'text-secondary-foreground'
+              }`}
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5 md:w-6 md:h-6" /> : <Menu className="w-5 h-5 md:w-6 md:h-6" />}
+            </button>
           </div>
         </div>
       </div>
@@ -114,30 +146,21 @@ export function Header() {
             <nav className="container mx-auto px-4 py-3 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
-  key={link.href}
-  href={link.href}
-  onClick={(e) => {
-  e.preventDefault(); // Detiene el salto brusco 🛑
-  
-  // 1. Identifica a dónde ir (ej: 'servicios')
-  const targetId = link.href.replace('#', '');
-  const element = document.getElementById(targetId);
-  
-  if (element) {
-    // 2. Primero le pedimos que cierre el menú 🚪
-    setIsMobileMenuOpen(false);
-    
-    // 3. Le damos un mini respiro (100ms) para que el cierre no trabe el movimiento
-    // y luego hacemos el scroll suave 🌊
-    setTimeout(() => {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  }
-}}
-  className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
->
-  {link.label}
-</a>
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Cerrar el menú primero
+                    setIsMobileMenuOpen(false);
+                    // Pequeño delay para que la animación de cierre no trabó el scroll
+                    setTimeout(() => {
+                      scrollToSection(link.href);
+                    }, 150);
+                  }}
+                  className="py-2.5 px-4 rounded-lg text-foreground font-medium hover:bg-muted transition-colors text-sm"
+                >
+                  {link.label}
+                </a>
               ))}
             </nav>
           </motion.div>
