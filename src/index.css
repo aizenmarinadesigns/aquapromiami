@@ -133,17 +133,22 @@
     scroll-behavior: smooth;
   }
 
-  /* Scroll offset for sticky header */
-section[id] {
-  scroll-padding-top: 70px; /* Usamos PADDING, no margin, es más estable para el sticky header */
-  scroll-margin-top: 0 !important; 
-}
-
-@media (min-width: 768px) {
+  /*
+    Offset para el navbar fijo.
+    scroll-padding-top es el método correcto con position: fixed.
+    Valores ajustados a la altura real del header:
+      - mobile:  h-16 = 64px  → usamos 68px (4px de breathing room)
+      - desktop: h-20 = 80px  → usamos 84px
+  */
   section[id] {
-    scroll-margin-top: 90px;
+    scroll-padding-top: 68px;
   }
-}
+
+  @media (min-width: 1024px) {
+    section[id] {
+      scroll-padding-top: 84px;
+    }
+  }
 }
 
 @layer components {
