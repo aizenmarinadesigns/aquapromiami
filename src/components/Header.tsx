@@ -27,7 +27,7 @@ export function Header() {
     { href: language === 'es' ? '#servicios' : '#services', label: t('nav.services') },
     { href: language === 'es' ? '#testimonios' : '#testimonials', label: t('nav.testimonials') },
     { href: language === 'es' ? '#precios' : '#pricing', label: t('nav.pricing') },
-    { href: language === 'es' ? '#garantias' : '#guarantees', label: t('nav.contacto') },
+    { href: language === 'es' ? '#garantias' : '#guarantees', label: t('nav.guarantees') },
     { href: language === 'es' ? '#contacto' : '#contact', label: t('nav.contact') },
   ];
 
