@@ -43,7 +43,7 @@ export function BookingSection() {
       ? `Hola! Quiero reservar una cita para servicio de piscina:\n📅 Fecha: ${formattedDate}\n⏰ Horario: ${slotText}\n\nPor favor confirmen disponibilidad.`
       : `Hi! I want to book a pool service appointment:\n📅 Date: ${formattedDate}\n⏰ Time: ${slotText}\n\nPlease confirm availability.`;
     
-    return `https://wa.me/34623282101?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/13055550100?text=${encodeURIComponent(message)}`;
   };
 
   return (
