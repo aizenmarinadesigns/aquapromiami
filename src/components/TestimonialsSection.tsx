@@ -81,7 +81,7 @@ export function TestimonialsSection() {
                 <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
 
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-secondary-foreground font-bold text-lg flex-shrink-0">
+                  <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg flex-shrink-0">
                     {testimonial.initials}
                   </div>
                   <div>
@@ -121,7 +121,7 @@ export function TestimonialsSection() {
               <Quote className="absolute top-3 right-3 w-6 h-6 text-primary/20" />
 
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-secondary-foreground font-bold text-base flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-base flex-shrink-0">
                   {testimonial.initials}
                 </div>
                 <div>

@@ -69,6 +69,7 @@ export function TransformationsSection() {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(1);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
 
   // Calculate cards per view based on screen size
   useEffect(() => {
@@ -87,15 +88,37 @@ export function TransformationsSection() {
     return () => window.removeEventListener('resize', updateCardsPerView);
   }, []);
 
-  const totalDots = Math.ceil(transformCards.length / cardsPerView);
+  const totalSlides = transformCards.length;
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalDots) % totalDots);
+    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setIsAutoPlay(false);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalDots);
+    setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    setIsAutoPlay(false);
   };
+
+  // Auto-play carousel
+  useEffect(() => {
+    if (!isAutoPlay) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(timer);
+  }, [isAutoPlay, totalSlides]);
+
+  // Resume autoplay after 10 seconds of inactivity
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAutoPlay(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [currentIndex]);
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -106,12 +129,19 @@ export function TransformationsSection() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [totalDots]);
+  }, []);
 
-  const visibleCards = transformCards.slice(
-    currentIndex * cardsPerView,
-    currentIndex * cardsPerView + cardsPerView
-  );
+  const getVisibleCards = () => {
+    const cards = [];
+    for (let i = 0; i < cardsPerView; i++) {
+      const index = (currentIndex + i) % totalSlides;
+      cards.push(transformCards[index]);
+    }
+    return cards;
+  };
+
+  const visibleCards = getVisibleCards();
+  const totalDots = transformCards.length;
 
   return (
     <section id="transformaciones" className="py-12 md:py-20 bg-background border-t border-border/30">
@@ -126,7 +156,7 @@ export function TransformationsSection() {
         >
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-2">
             <div>
-              <span className="text-accent font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
+              <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
                 <span className="lang-es">Transformaciones</span>
                 <span className="lang-en hidden">Transformations</span>
               </span>
@@ -136,7 +166,7 @@ export function TransformationsSection() {
               </h2>
             </div>
 
-            {/* Navigation Arrows - Desktop and Mobile */}
+            {/* Navigation Arrows */}
             <div className="flex gap-3">
               <button
                 onClick={handlePrev}
@@ -167,9 +197,8 @@ export function TransformationsSection() {
             <motion.div
               key={card.id}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
               className="overflow-hidden rounded-2xl bg-card shadow-lg border border-border hover:shadow-xl transition-shadow"
             >
               {/* Image with Before/After Badges */}
@@ -181,13 +210,13 @@ export function TransformationsSection() {
                 />
 
                 {/* Before Badge - Left */}
-                <Badge className="absolute top-3 left-3 bg-destructive text-destructive-foreground text-xs md:text-sm font-bold">
+                <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs md:text-sm font-bold">
                   <span className="lang-es">ANTES</span>
                   <span className="lang-en hidden">BEFORE</span>
                 </Badge>
 
                 {/* After Badge - Right */}
-                <Badge className="absolute top-3 right-3 bg-secondary text-secondary-foreground text-xs md:text-sm font-bold">
+                <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground text-xs md:text-sm font-bold">
                   <span className="lang-es">DESPUÉS</span>
                   <span className="lang-en hidden">AFTER</span>
                 </Badge>
@@ -198,7 +227,7 @@ export function TransformationsSection() {
                 <div className="grid grid-cols-2 gap-4">
                   {/* Location */}
                   <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-accent mb-1">
+                    <p className="text-xs uppercase font-semibold text-primary mb-1">
                       <span className="lang-es">Ubicación</span>
                       <span className="lang-en hidden">Location</span>
                     </p>
@@ -207,7 +236,7 @@ export function TransformationsSection() {
 
                   {/* Time */}
                   <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-accent mb-1">
+                    <p className="text-xs uppercase font-semibold text-primary mb-1">
                       <span className="lang-es">Tiempo</span>
                       <span className="lang-en hidden">Time</span>
                     </p>
@@ -216,7 +245,7 @@ export function TransformationsSection() {
 
                   {/* Service */}
                   <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-accent mb-1">
+                    <p className="text-xs uppercase font-semibold text-primary mb-1">
                       <span className="lang-es">Servicio</span>
                       <span className="lang-en hidden">Service</span>
                     </p>
@@ -225,11 +254,11 @@ export function TransformationsSection() {
 
                   {/* Price - Highlighted */}
                   <div className="flex flex-col">
-                    <p className="text-xs uppercase font-semibold text-accent mb-1">
+                    <p className="text-xs uppercase font-semibold text-primary mb-1">
                       <span className="lang-es">Inversión</span>
                       <span className="lang-en hidden">Investment</span>
                     </p>
-                    <p className="text-sm md:text-base font-bold text-accent text-lg">{card.price}</p>
+                    <p className="text-sm md:text-base font-bold text-primary text-lg">{card.price}</p>
                   </div>
                 </div>
               </div>
@@ -238,14 +267,17 @@ export function TransformationsSection() {
         </div>
 
         {/* Dots Navigation */}
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center gap-2 flex-wrap">
           {Array.from({ length: totalDots }).map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                setIsAutoPlay(false);
+              }}
               className={`transition-all duration-300 rounded-full ${
                 index === currentIndex
-                  ? 'bg-accent w-8 h-2'
+                  ? 'bg-primary w-8 h-2'
                   : 'bg-muted w-2 h-2 hover:bg-muted-foreground'
               }`}
               aria-label={`Go to slide ${index + 1}`}
