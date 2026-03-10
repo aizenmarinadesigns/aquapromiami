@@ -80,7 +80,7 @@ export function AboutSection() {
           >
             <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-border bg-muted">
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=600&fit=crop"
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=800&fit=crop&crop=faces"
                 alt="Equipo de mantenimiento de piscinas AquaPro Miami"
                 className="w-full h-full object-cover aspect-square"
               />

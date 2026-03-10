@@ -76,21 +76,30 @@ export function TestimonialsSection() {
 
   const sectionId = language === 'es' ? 'testimonios' : 'testimonials';
 
-  // Duplicate testimonials for infinite loop effect
+  // Duplicate array for seamless infinite loop
   const testimonials = [...baseTestimonials, ...baseTestimonials];
-  const cardWidth = 360; // w-full with gap
-  const totalWidth = testimonials.length * (cardWidth + 32); // 32 = gap-8
+  const cardWidth = 320; // w-80 width
+  const gapWidth = 32;   // gap-8 width
+  const singleSetWidth = baseTestimonials.length * (cardWidth + gapWidth);
+  const [position, setPosition] = useState(0);
 
-  // Auto-scroll slowly and continuously
+  // Continuous smooth scrolling
   useEffect(() => {
     if (isHovered || !isInView) return;
 
-    const interval = setInterval(() => {
-      setScrollX((prev) => (prev + cardWidth + 32) % totalWidth);
-    }, 4000); // Move every 4 seconds
+    const scrollInterval = setInterval(() => {
+      setPosition((prev) => {
+        const newPos = prev + (cardWidth + gapWidth);
+        // Reset to start when we've scrolled through one full set
+        if (newPos >= singleSetWidth) {
+          return 0;
+        }
+        return newPos;
+      });
+    }, 4000);
 
-    return () => clearInterval(interval);
-  }, [isHovered, isInView]);
+    return () => clearInterval(scrollInterval);
+  }, [isHovered, isInView, singleSetWidth, cardWidth]);
 
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
@@ -121,12 +130,11 @@ export function TestimonialsSection() {
         >
           <motion.div
             className="flex gap-8"
-            animate={{ x: -scrollX }}
+            animate={{ x: -position }}
             transition={{
-              type: 'spring',
-              stiffness: 50,
-              damping: 30,
-              mass: 1,
+              type: 'tween',
+              ease: 'linear',
+              duration: 0.8,
             }}
           >
             {testimonials.map((testimonial, index) => (

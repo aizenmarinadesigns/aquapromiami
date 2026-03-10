@@ -61,7 +61,7 @@ export function PricingSection() {
               whileHover={plan.popular ? { y: -8 } : undefined}
               className={`relative rounded-2xl transition-all duration-300 ${
                 plan.popular
-                  ? 'ring-2 ring-secondary shadow-none hover:shadow-[0_20px_40px_rgba(224,78%,21%,0.2)]'
+                  ? 'ring-2 ring-secondary shadow-none hover:shadow-[0_20px_40px_rgba(32,55,90,0.2)] hover:ring-2 hover:ring-secondary'
                   : 'border border-border hover:shadow-md'
               }`}
             >
