@@ -134,7 +134,7 @@ export function TransformationsSection() {
                 className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
               >
                 {/* Image */}
-                <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
+                <div className="relative h-80 md:h-96 overflow-hidden bg-gray-100">
                   <img
                     src={card.image}
                     alt={card.location}
