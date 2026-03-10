@@ -14,15 +14,15 @@ interface TransformCard {
 const transformCards: TransformCard[] = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop',
+    image: '/antes-despues/construccion-pileta.png',
     location: 'Kendall',
-    time: '6 horas',
-    service: 'Limpieza profunda',
-    price: '$350',
+    time: '4 días',
+    service: 'Construcción y Renovación',
+    price: '$6,500',
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1576056201312-1697304da793?w=800&h=600&fit=crop',
+    image: '/antes-despues/pileta-renovada.png',
     location: 'Coral Gables',
     time: '3 días',
     service: 'Renovación Diamond Brite',
@@ -30,7 +30,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1600007687-98b52511c3a5?w=800&h=600&fit=crop',
+    image: '/antes-despues/4-limpieza-acido-key-biscayne.png',
     location: 'Key Biscayne',
     time: '1 día',
     service: 'Lavado con ácido',
@@ -38,11 +38,11 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop',
+    image: '/antes-despues/mantenimiento-de-equipos.png',
     location: 'Hialeah',
-    time: '4 días',
-    service: 'Renovación Diamond Brite',
-    price: '$5,800',
+    time: '2 horas',
+    service: 'Mantenimiento de Equipos',
+    price: '$350',
   },
 ];
 
