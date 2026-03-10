@@ -58,7 +58,7 @@ export function ContactSection() {
   const sectionId = language === 'es' ? 'contacto' : 'contact';
 
   return (
-    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-gradient-to-br from-secondary via-secondary to-primary/30">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

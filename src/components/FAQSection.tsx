@@ -22,7 +22,7 @@ export function FAQSection() {
   ];
 
   return (
-    <section ref={ref} className="py-12 md:py-20 bg-pool-dark">
+    <section ref={ref} className="py-12 md:py-20 bg-gradient-to-br from-[#0f3a5f] via-[#0891b2] to-[#06b6d4]">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
