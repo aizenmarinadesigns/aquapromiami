@@ -18,7 +18,7 @@ export function ServiceAreasSection() {
   ];
 
   return (
-    <section ref={ref} className="py-12 md:py-20 section-light">
+    <section ref={ref} className="py-12 md:py-20 bg-primary/5">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

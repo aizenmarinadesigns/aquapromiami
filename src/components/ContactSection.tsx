@@ -58,7 +58,7 @@ export function ContactSection() {
   const sectionId = language === 'es' ? 'contacto' : 'contact';
 
   return (
-    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-background">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-pool-dark">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -69,7 +69,7 @@ export function ContactSection() {
           <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('nav.contact')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
             {t('contact.title')}
           </h2>
         </motion.div>
