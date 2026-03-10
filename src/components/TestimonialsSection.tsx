@@ -172,7 +172,7 @@ export function TestimonialsSection() {
                     ))}
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed text-base flex-1 overflow-hidden">
+                  <p className="text-muted-foreground leading-relaxed text-base flex-1 line-clamp-3">
                     "{testimonial.text}"
                   </p>
                 </motion.div>
