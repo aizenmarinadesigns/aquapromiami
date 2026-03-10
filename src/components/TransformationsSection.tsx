@@ -131,16 +131,9 @@ export function TransformationsSection() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, []);
 
-  const getVisibleCards = () => {
-    const cards = [];
-    for (let i = 0; i < cardsPerView; i++) {
-      const index = (currentIndex + i) % totalSlides;
-      cards.push(transformCards[index]);
-    }
-    return cards;
-  };
-
-  const visibleCards = getVisibleCards();
+  const visibleCards = transformCards.slice(currentIndex, currentIndex + cardsPerView).length === cardsPerView
+    ? transformCards.slice(currentIndex, currentIndex + cardsPerView)
+    : [...transformCards.slice(currentIndex), ...transformCards.slice(0, cardsPerView - (totalSlides - currentIndex))];
   const totalDots = transformCards.length;
 
   return (
