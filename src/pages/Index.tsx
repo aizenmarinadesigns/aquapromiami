@@ -8,7 +8,6 @@ import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { PricingSection } from '@/components/PricingSection';
 import { BookingSection } from '@/components/BookingSection';
 import { AboutSection } from '@/components/AboutSection';
-import { GuaranteesSection } from '@/components/GuaranteesSection';
 import { FAQSection } from '@/components/FAQSection';
 import { ServiceAreasSection } from '@/components/ServiceAreasSection';
 import { ContactSection } from '@/components/ContactSection';
@@ -25,7 +24,6 @@ const Index = () => {
           <HeroSection />
           <BookingSection />
           <ProblemsSection />
-          <GuaranteesSection />
           <ServicesSection />
           <TransformationsSection />
           <TestimonialsSection />

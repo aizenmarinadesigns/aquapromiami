@@ -2,13 +2,14 @@ import { Star, Quote, Users } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 export function TestimonialsSection() {
   const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [isHovered, setIsHovered] = useState(false);
+  const [direction, setDirection] = useState(0);
 
   const testimonials = [
     {
@@ -33,11 +34,22 @@ export function TestimonialsSection() {
 
   const sectionId = language === 'es' ? 'testimonios' : 'testimonials';
 
-  // Duplicate testimonials for infinite scroll
+  // Triple the testimonials for infinite loop
   const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
+  // Auto-scroll every 5 seconds
+  useEffect(() => {
+    if (isHovered) return;
+
+    const timer = setInterval(() => {
+      setDirection(1);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [isHovered]);
+
   return (
-    <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light relative overflow-hidden">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -57,52 +69,64 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Desktop Infinite Carousel */}
-        <div className="hidden md:block relative">
-          <motion.div
-            className="flex gap-6 lg:gap-8"
-            animate={{ x: isHovered ? 0 : [0, -33.33 + '%'] }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-              repeatType: 'loop',
-              paused: isHovered,
-            }}
+        {/* Desktop Infinite Carousel - Fixed Height */}
+        <div className="hidden md:block">
+          <div
+            className="relative overflow-hidden"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="card-elevated relative flex-shrink-0 w-full md:w-1/3 lg:w-[calc(33.333%-1.25rem)] p-6 lg:p-8 hover:shadow-xl transition-all duration-300"
-                whileHover={{ y: -5 }}
-              >
-                <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
+            <motion.div
+              className="flex gap-8"
+              animate={{
+                x: direction > 0 ? `-${(direction % 3) * 33.333}%` : '0%',
+              }}
+              transition={{
+                type: 'tween',
+                ease: 'easeInOut',
+                duration: 0.8,
+              }}
+              onAnimationComplete={() => {
+                if (direction > 0 && direction % 3 === 0) {
+                  setDirection(0);
+                }
+              }}
+            >
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-1/3 lg:w-[calc(33.333%-1.333rem)]"
+                >
+                  <motion.div
+                    className="card-elevated relative p-8 h-80 flex flex-col transition-shadow duration-300 hover:shadow-lg"
+                    whileHover={{ y: 0 }}
+                  >
+                    <Quote className="absolute top-4 right-4 w-8 h-8 text-primary/20" />
 
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg flex-shrink-0">
-                    {testimonial.initials}
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-foreground text-base">{testimonial.name}</h4>
-                    <p className="text-sm text-muted-foreground">{testimonial.location}</p>
-                  </div>
+                    <div className="flex items-center gap-4 mb-6 flex-shrink-0">
+                      <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg flex-shrink-0">
+                        {testimonial.initials}
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-foreground text-base truncate">{testimonial.name}</h4>
+                        <p className="text-sm text-muted-foreground truncate">{testimonial.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex gap-1 mb-4 flex-shrink-0">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+
+                    <p className="text-muted-foreground leading-relaxed text-base flex-1 overflow-hidden">
+                      "{testimonial.text}"
+                    </p>
+                  </motion.div>
                 </div>
-
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-
-                <p className="text-muted-foreground leading-relaxed text-base">
-                  "{testimonial.text}"
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-
+              ))}
+            </motion.div>
+          </div>
         </div>
 
         {/* Mobile Grid */}
@@ -121,9 +145,9 @@ export function TestimonialsSection() {
                 <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-base flex-shrink-0">
                   {testimonial.initials}
                 </div>
-                <div>
-                  <h4 className="font-bold text-foreground text-sm">{testimonial.name}</h4>
-                  <p className="text-xs text-muted-foreground">{testimonial.location}</p>
+                <div className="min-w-0">
+                  <h4 className="font-bold text-foreground text-sm truncate">{testimonial.name}</h4>
+                  <p className="text-xs text-muted-foreground truncate">{testimonial.location}</p>
                 </div>
               </div>
 

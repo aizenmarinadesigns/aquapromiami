@@ -1,19 +1,20 @@
-import { MapPin } from 'lucide-react';
+import { MapPin, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 export function ServiceAreasSection() {
   const { t } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [expandedZone, setExpandedZone] = useState<number | null>(0);
 
   const zones = [
-    { name: t('areas.west'), areas: t('areas.west.list').split('|'), color: 'bg-primary' },
-    { name: t('areas.south'), areas: t('areas.south.list').split('|'), color: 'bg-secondary' },
-    { name: t('areas.north'), areas: t('areas.north.list').split('|'), color: 'bg-accent' },
-    { name: t('areas.east'), areas: t('areas.east.list').split('|'), color: 'bg-whatsapp' },
+    { name: t('areas.west'), areas: t('areas.west.list').split('|') },
+    { name: t('areas.south'), areas: t('areas.south.list').split('|') },
+    { name: t('areas.north'), areas: t('areas.north.list').split('|') },
+    { name: t('areas.east'), areas: t('areas.east.list').split('|') },
   ];
 
   return (
@@ -23,55 +24,98 @@ export function ServiceAreasSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-8 md:mb-16"
+          className="text-center mb-12 md:mb-16"
         >
           <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('footer.areas')}
           </span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
             {t('areas.title')}
           </h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto px-4">
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
             {t('areas.subtitle')}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 max-w-5xl mx-auto">
-          {zones.map((zone, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="card-elevated p-3 md:p-6"
-            >
-              <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg ${zone.color} flex items-center justify-center mb-2 md:mb-4`}>
-                <MapPin className="w-4 h-4 md:w-5 md:h-5 text-secondary-foreground" />
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto items-center">
+          {/* Left: Map Placeholder */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="w-full rounded-2xl overflow-hidden shadow-lg border border-border bg-muted h-96"
+          >
+            {/* Placeholder for actual map - can be replaced with Google Maps API */}
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/5">
+              <div className="text-center">
+                <MapPin className="w-12 h-12 text-primary mx-auto mb-3 opacity-50" />
+                <p className="text-muted-foreground">Mapa de Áreas de Servicio</p>
               </div>
-              <h3 className="font-bold text-foreground mb-2 md:mb-3 text-sm md:text-base">{zone.name}</h3>
-              <ul className="space-y-1 md:space-y-2">
-                {zone.areas.map((area, i) => (
-                  <li key={i} className="text-muted-foreground text-xs md:text-sm flex items-center gap-1.5 md:gap-2">
-                    <div className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-primary flex-shrink-0" />
-                    {area}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-center mt-6 md:mt-10 text-muted-foreground text-sm md:text-base px-4"
-        >
-          {t('areas.not.found')}{' '}
-          <a href="#contacto" className="text-primary font-medium hover:underline">
-            {t('nav.contact')}
-          </a>
-        </motion.p>
+          {/* Right: Dropdown Zones */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-3"
+          >
+            {zones.map((zone, index) => (
+              <div key={index} className="border border-border rounded-lg overflow-hidden bg-card">
+                <button
+                  onClick={() => setExpandedZone(expandedZone === index ? null : index)}
+                  className="w-full px-4 md:px-6 py-4 md:py-5 flex items-center justify-between hover:bg-muted/30 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="font-bold text-foreground text-base md:text-lg">{zone.name}</h3>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: expandedZone === index ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-primary" />
+                  </motion.div>
+                </button>
+
+                {/* Dropdown Content */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: expandedZone === index ? 'auto' : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-4 md:px-6 py-4 md:py-5 border-t border-border bg-muted/20">
+                    <ul className="space-y-2 md:space-y-3">
+                      {zone.areas.map((area, i) => (
+                        <li key={i} className="flex items-center gap-3 text-foreground text-sm md:text-base">
+                          <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
+                          {area}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
+
+            {/* Note */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.4 }}
+              className="text-muted-foreground text-xs md:text-sm pt-4"
+            >
+              {t('areas.not.found')}{' '}
+              <a href="#contacto" className="text-primary font-medium hover:underline">
+                {t('nav.contact')}
+              </a>
+            </motion.p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
