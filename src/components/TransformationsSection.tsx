@@ -17,7 +17,7 @@ const transformCards: TransformCard[] = [
     id: 1,
     image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1000&h=600&fit=crop',
     location: 'Kendall',
-    time: '6 hours',
+    time: '6 horas',
     service: 'Limpieza profunda',
     price: '$350',
   },
@@ -25,7 +25,7 @@ const transformCards: TransformCard[] = [
     id: 2,
     image: 'https://images.unsplash.com/photo-1576056201312-1697304da793?w=1000&h=600&fit=crop',
     location: 'Coral Gables',
-    time: '3 days',
+    time: '3 días',
     service: 'Renovación Diamond Brite',
     price: '$4,200',
   },
@@ -33,7 +33,7 @@ const transformCards: TransformCard[] = [
     id: 3,
     image: 'https://images.unsplash.com/photo-1600007687-98b52511c3a5?w=1000&h=600&fit=crop',
     location: 'Key Biscayne',
-    time: '1 day',
+    time: '1 día',
     service: 'Lavado con ácido',
     price: '$550',
   },
@@ -41,7 +41,7 @@ const transformCards: TransformCard[] = [
     id: 4,
     image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1000&h=600&fit=crop',
     location: 'Miami Lakes',
-    time: '5 hours',
+    time: '5 horas',
     service: 'Servicio semanal',
     price: '$250',
   },
@@ -76,16 +76,6 @@ export function TransformationsSection() {
     setCurrentIndex((prev) => (prev + 1) % transformCards.length);
   };
 
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') handlePrev();
-      if (e.key === 'ArrowRight') handleNext();
-    };
-
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
-
   const getVisibleCards = () => {
     const cards = [];
     for (let i = 0; i < cardsPerView; i++) {
@@ -100,30 +90,53 @@ export function TransformationsSection() {
   return (
     <section id="transformaciones" className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Header - Centered */}
+        {/* Header with Navigation Arrows on Top Right */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-10 md:mb-14 text-center"
+          className="mb-10 md:mb-14"
         >
-          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
-            <span className="lang-es">Resultados Reales</span>
-            <span className="lang-en hidden">Real Results</span>
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            <span className="lang-es">Antes & Después</span>
-            <span className="lang-en hidden">Before & After</span>
-          </h2>
-          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+            <div>
+              <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
+                <span className="lang-es">Resultados Reales</span>
+                <span className="lang-en hidden">Real Results</span>
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center md:text-left">
+                <span className="lang-es">Antes & Después</span>
+                <span className="lang-en hidden">Before & After</span>
+              </h2>
+            </div>
+
+            {/* Navigation Arrows */}
+            <div className="flex gap-3 justify-center md:justify-end">
+              <button
+                onClick={handlePrev}
+                className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-secondary hover:border-secondary hover:text-white transition-all"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-secondary hover:border-secondary hover:text-white transition-all"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
+          </div>
+
+          <p className="text-sm md:text-base text-muted-foreground text-center md:text-left">
             <span className="lang-es">Transformaciones reales en Miami-Dade. Ver para creer.</span>
             <span className="lang-en hidden">Real transformations in Miami-Dade. See to believe.</span>
           </p>
         </motion.div>
 
         {/* Carousel Cards */}
-        <div className="mb-8 md:mb-12">
+        <div className="mb-8 md:mb-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {visibleCards.map((card, index) => (
               <motion.div
@@ -131,14 +144,14 @@ export function TransformationsSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="overflow-hidden rounded-2xl bg-card shadow-lg border border-border"
+                className="overflow-hidden rounded-2xl bg-card shadow-lg border border-border hover:shadow-xl transition-shadow"
               >
-                {/* Single Image */}
+                {/* Image */}
                 <div className="h-64 md:h-80 overflow-hidden bg-muted">
                   <img
                     src={card.image}
                     alt={card.location}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                 </div>
 
@@ -183,36 +196,20 @@ export function TransformationsSection() {
           </div>
         </div>
 
-        {/* Navigation Controls */}
-        <div className="flex items-center justify-center gap-4">
-          <button
-            onClick={handlePrev}
-            className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-muted hover:shadow-lg transition-all"
-            aria-label="Previous"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <div className="flex justify-center gap-2">
-            {Array.from({ length: transformCards.length }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`transition-all duration-300 rounded-full ${
-                  index === currentIndex
-                    ? 'bg-secondary w-8 h-2'
-                    : 'bg-muted w-2 h-2 hover:bg-muted-foreground'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-          <button
-            onClick={handleNext}
-            className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-muted hover:shadow-lg transition-all"
-            aria-label="Next"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+        {/* Dots Navigation */}
+        <div className="flex justify-center gap-2">
+          {Array.from({ length: transformCards.length }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`transition-all duration-300 rounded-full ${
+                index === currentIndex
+                  ? 'bg-secondary w-8 h-2'
+                  : 'bg-muted w-2 h-2 hover:bg-muted-foreground'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

@@ -206,10 +206,10 @@ export function ContactSection() {
               {/* Phone */}
               <a
                 href={`tel:+${miamiiPhoneNumber}`}
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
-                  <Phone className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                  <Phone className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary/80" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">+1 (305) 555-0100</p>
@@ -222,10 +222,10 @@ export function ContactSection() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
-                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary/80" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">WhatsApp</p>
@@ -236,10 +236,10 @@ export function ContactSection() {
               {/* Email */}
               <a
                 href="mailto:contact@aquapro.com"
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
-                  <Mail className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                  <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary/80" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">contact@aquapro.com</p>

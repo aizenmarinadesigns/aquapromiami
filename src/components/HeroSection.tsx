@@ -22,7 +22,7 @@ export function HeroSection() {
       {/* Background Image with Parallax */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1563427927-e61b5f4e2b5b?w=1600&h=1000&fit=crop')` }}
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1584622614875-e51df1bdc82f?w=1600&h=1000&fit=crop&crop=entropy')` }}
       >
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-primary/50" />
