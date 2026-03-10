@@ -134,12 +134,21 @@ export function TransformationsSection() {
                 className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
               >
                 {/* Image */}
-                <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
+                <div className="relative h-80 md:h-96 overflow-hidden bg-gray-100">
                   <img
                     src={card.image}
                     alt={card.location}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
+                  {/* Before/After Labels */}
+                  <div className="absolute left-4 top-4 bg-black/60 text-white px-3 py-1.5 rounded-full text-xs font-bold uppercase">
+                    <span className="lang-es">Antes</span>
+                    <span className="lang-en hidden">Before</span>
+                  </div>
+                  <div className="absolute right-4 top-4 bg-primary text-white px-3 py-1.5 rounded-full text-xs font-bold uppercase">
+                    <span className="lang-es">Después</span>
+                    <span className="lang-en hidden">After</span>
+                  </div>
                 </div>
 
                 {/* Info Grid */}

@@ -105,9 +105,13 @@ export function PricingSection() {
                 {/* CTA Button */}
                 <a
                   href={language === 'es' ? '#contacto' : '#contact'}
-                  className="block w-full py-3 px-6 rounded-lg font-semibold text-center bg-primary text-secondary hover:bg-primary/90 transition-all duration-300 hover:shadow-lg"
+                  className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg ${
+                    plan.popular
+                      ? 'bg-secondary text-white hover:bg-secondary/90'
+                      : 'bg-primary text-secondary hover:bg-primary/90'
+                  }`}
                 >
-                  {t('pricing.cta')}
+                  {plan.popular ? (t('contact.submit')) : t('pricing.cta')}
                 </a>
               </div>
             </motion.div>

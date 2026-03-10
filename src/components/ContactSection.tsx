@@ -58,7 +58,7 @@ export function ContactSection() {
   const sectionId = language === 'es' ? 'contacto' : 'contact';
 
   return (
-    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-gradient-to-b from-pool-dark to-pool-turquoise/30">
+    <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -69,7 +69,7 @@ export function ContactSection() {
           <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('nav.contact')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
             {t('contact.title')}
           </h2>
         </motion.div>
@@ -82,7 +82,7 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {isSubmitted ? (
-              <div className="bg-gradient-to-b from-white/90 to-secondary/10 rounded-xl shadow-lg text-center py-8 md:py-12">
+              <div className="bg-white rounded-xl shadow-lg text-center py-8 md:py-12 border border-border">
                 <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
                   <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
                 </div>
@@ -91,7 +91,7 @@ export function ContactSection() {
                 </h3>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-gradient-to-b from-white/90 to-secondary/10 rounded-xl shadow-lg space-y-4 md:space-y-5 p-4 md:p-6">
+              <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg space-y-4 md:space-y-5 p-4 md:p-6 border border-border">
                 {/* Name */}
                 <div>
                   <label className="block text-xs md:text-sm font-medium text-foreground mb-1.5 md:mb-2">
@@ -198,7 +198,7 @@ export function ContactSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col justify-center"
           >
-            <h3 className="text-lg md:text-xl font-bold text-foreground mb-4 md:mb-6">
+            <h3 className="text-lg md:text-xl font-bold text-foreground mb-4 md:mb-6 hidden md:block">
               {t('contact.alt.title')}
             </h3>
 
