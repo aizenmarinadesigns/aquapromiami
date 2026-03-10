@@ -4,12 +4,20 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
+interface Testimonial {
+  name: string;
+  location: string;
+  text: string;
+  initials: string;
+}
+
 export function TestimonialsSection() {
   const { t, language } = useLanguage();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [isHovered, setIsHovered] = useState(false);
   const [position, setPosition] = useState(0);
+  const isHoveredRef = useRef(false);
 
   const baseTestimonials = [
     {
@@ -82,17 +90,21 @@ export function TestimonialsSection() {
   const gapWidth = 32;
   const itemWidth = cardWidth + gapWidth;
 
+  // Update ref when isHovered changes
+  useEffect(() => {
+    isHoveredRef.current = isHovered;
+  }, [isHovered]);
+
   // Continuous smooth scrolling
   useEffect(() => {
     if (!isInView) return;
 
     let animationFrameId: number;
     let currentPosition = 0;
-    let isPaused = isHovered;
 
     const animate = () => {
-      if (!isPaused) {
-        currentPosition += 0.5; // Smooth continuous movement
+      if (!isHoveredRef.current) {
+        currentPosition += 0.8; // Smooth continuous movement (faster for better visibility)
         const singleSetWidth = baseTestimonials.length * itemWidth;
 
         if (currentPosition >= singleSetWidth) {
@@ -107,7 +119,7 @@ export function TestimonialsSection() {
     animationFrameId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isInView, baseTestimonials.length, itemWidth, isHovered]);
+  }, [isInView, baseTestimonials.length, itemWidth]);
 
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
@@ -151,7 +163,7 @@ export function TestimonialsSection() {
                 className="flex-shrink-0 w-80"
               >
                 <motion.div
-                  className="card-elevated relative p-8 h-80 flex flex-col transition-shadow duration-300 hover:shadow-lg"
+                  className="card-elevated relative p-8 min-h-80 flex flex-col transition-shadow duration-300 hover:shadow-lg"
                   whileHover={{ y: -2 }}
                 >
                   <Quote className="absolute top-4 right-4 w-8 h-8 text-secondary/20" />
@@ -172,7 +184,7 @@ export function TestimonialsSection() {
                     ))}
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed text-base flex-1 line-clamp-3">
+                  <p className="text-muted-foreground leading-relaxed text-base flex-1">
                     "{testimonial.text}"
                   </p>
                 </motion.div>
