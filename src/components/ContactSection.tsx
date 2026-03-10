@@ -66,7 +66,7 @@ export function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-16"
         >
-          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
+          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('nav.contact')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
@@ -83,8 +83,8 @@ export function ContactSection() {
           >
             {isSubmitted ? (
               <div className="card-elevated text-center py-8 md:py-12">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
-                  <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <CheckCircle className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
                 </div>
                 <h3 className="text-lg md:text-xl font-bold text-foreground mb-2">
                   {t('contact.success')}
@@ -102,7 +102,7 @@ export function ContactSection() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm md:text-base"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary transition-all text-sm md:text-base"
                   />
                 </div>
 
@@ -116,7 +116,7 @@ export function ContactSection() {
                     required
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm md:text-base"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary transition-all text-sm md:text-base"
                   />
                 </div>
 
@@ -129,7 +129,7 @@ export function ContactSection() {
                     required
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm md:text-base"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary transition-all text-sm md:text-base"
                   >
                     <option value="">Selecciona una ciudad</option>
                     {cities.map((city) => (
@@ -147,7 +147,7 @@ export function ContactSection() {
                     required
                     value={formData.service}
                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all text-sm md:text-base"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary transition-all text-sm md:text-base"
                   >
                     {serviceTypes.map((type) => (
                       <option key={type.value} value={type.value}>{type.label}</option>
@@ -164,7 +164,7 @@ export function ContactSection() {
                     rows={2}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none text-sm md:text-base"
+                    className="w-full px-3 md:px-4 py-2.5 md:py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-secondary transition-all resize-none text-sm md:text-base"
                   />
                 </div>
 
@@ -172,7 +172,7 @@ export function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary text-primary-foreground flex items-center justify-center gap-2 disabled:opacity-70 text-sm md:text-base py-3 md:py-4 rounded-lg font-semibold hover:shadow-lg transition-all"
+                  className="w-full bg-secondary text-secondary-foreground flex items-center justify-center gap-2 disabled:opacity-70 text-sm md:text-base py-3 md:py-4 rounded-lg font-semibold hover:shadow-lg transition-all"
                 >
                   {isSubmitting ? (
                     <Loader2 className="w-4 h-4 md:w-5 md:h-5 animate-spin" />
@@ -206,10 +206,10 @@ export function ContactSection() {
               {/* Phone */}
               <a
                 href={`tel:+${miamiiPhoneNumber}`}
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
-                  <Phone className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
+                  <Phone className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">+1 (305) 555-0100</p>
@@ -222,10 +222,10 @@ export function ContactSection() {
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
-                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
+                  <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">WhatsApp</p>
@@ -236,10 +236,10 @@ export function ContactSection() {
               {/* Email */}
               <a
                 href="mailto:contact@aquapro.com"
-                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-primary/50 transition-colors group"
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-border hover:border-secondary/50 transition-colors group"
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
-                  <Mail className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors flex-shrink-0">
+                  <Mail className="w-5 h-5 md:w-6 md:h-6 text-secondary" />
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">contact@aquapro.com</p>

@@ -25,7 +25,7 @@ export function AboutSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-16"
         >
-          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
+          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             Nosotros
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
@@ -47,7 +47,7 @@ export function AboutSection() {
             </div>
 
             {/* Promise Statement */}
-            <div className="mb-8 p-6 bg-primary/5 rounded-xl border border-primary/20">
+            <div className="mb-8 p-6 bg-secondary/5 rounded-xl border border-secondary/20">
               <p className="text-foreground font-medium text-base">
                 {t('about.promise')}
               </p>
@@ -55,12 +55,11 @@ export function AboutSection() {
 
             {/* Credentials Below - No Boxes */}
             <div className="space-y-4">
-              <h3 className="text-sm uppercase font-bold text-primary">Acreditaciones</h3>
               <div className="grid grid-cols-2 gap-4">
                 {credentials.map((cred, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-1">
-                      <cred.icon className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center flex-shrink-0 mt-1">
+                      <cred.icon className="w-5 h-5 text-secondary" />
                     </div>
                     <div>
                       <p className="font-bold text-foreground text-sm">{cred.label}</p>
@@ -82,7 +81,7 @@ export function AboutSection() {
             <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-border bg-muted">
               <img
                 src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=600&fit=crop"
-                alt="Pool service team"
+                alt="Equipo de mantenimiento de piscinas AquaPro Miami"
                 className="w-full h-full object-cover aspect-square"
               />
             </div>

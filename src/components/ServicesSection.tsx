@@ -55,31 +55,28 @@ export function ServicesSection() {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-4 md:gap-8">
+        <div className="grid md:grid-cols-4 gap-4 md:gap-6">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="card-elevated group p-4 md:p-6"
+              className="card-elevated group p-4 md:p-5 aspect-square flex flex-col"
             >
-              <div className="flex items-start gap-3 md:gap-4">
-                {/* Este className tenía un backtick de apertura faltante en el original */}
-                <div className={`w-10 h-10 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-                  <service.icon className="w-5 h-5 md:w-7 md:h-7 text-secondary-foreground" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base md:text-xl font-bold text-foreground mb-2 md:mb-4">{service.title}</h3>
-                  <ul className="space-y-1.5 md:space-y-2">
-                    {service.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm md:text-base">
-                        <Check className="w-3.5 h-3.5 md:w-4 md:h-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg md:rounded-xl bg-gradient-to-br ${service.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300 mb-3 md:mb-4`}>
+                <service.icon className="w-6 h-6 md:w-7 md:h-7 text-secondary-foreground" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h3 className="text-sm md:text-base font-bold text-foreground mb-2 md:mb-3 line-clamp-2">{service.title}</h3>
+                <ul className="space-y-1 md:space-y-1.5">
+                  {service.items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-1.5 text-muted-foreground text-xs md:text-sm">
+                      <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="line-clamp-2">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}
