@@ -9,7 +9,7 @@ export function TestimonialsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
   const [isHovered, setIsHovered] = useState(false);
-  const [scrollX, setScrollX] = useState(0);
+  const [position, setPosition] = useState(0);
 
   const baseTestimonials = [
     {
@@ -76,21 +76,20 @@ export function TestimonialsSection() {
 
   const sectionId = language === 'es' ? 'testimonios' : 'testimonials';
 
-  // Duplicate array for seamless infinite loop
+  // Duplicate for infinite loop
   const testimonials = [...baseTestimonials, ...baseTestimonials];
-  const cardWidth = 320; // w-80 width
-  const gapWidth = 32;   // gap-8 width
-  const singleSetWidth = baseTestimonials.length * (cardWidth + gapWidth);
-  const [position, setPosition] = useState(0);
+  const cardWidth = 320;
+  const gapWidth = 32;
+  const itemWidth = cardWidth + gapWidth;
+  const singleSetWidth = baseTestimonials.length * itemWidth;
 
-  // Continuous smooth scrolling
+  // Continuous scrolling
   useEffect(() => {
     if (isHovered || !isInView) return;
 
     const scrollInterval = setInterval(() => {
       setPosition((prev) => {
-        const newPos = prev + (cardWidth + gapWidth);
-        // Reset to start when we've scrolled through one full set
+        const newPos = prev + itemWidth;
         if (newPos >= singleSetWidth) {
           return 0;
         }
@@ -99,7 +98,7 @@ export function TestimonialsSection() {
     }, 4000);
 
     return () => clearInterval(scrollInterval);
-  }, [isHovered, isInView, singleSetWidth, cardWidth]);
+  }, [isHovered, isInView, singleSetWidth, itemWidth]);
 
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
@@ -122,7 +121,7 @@ export function TestimonialsSection() {
           </p>
         </motion.div>
 
-        {/* Infinite Horizontal Carousel */}
+        {/* Infinite Carousel */}
         <div
           className="relative overflow-hidden"
           onMouseEnter={() => setIsHovered(true)}
@@ -164,7 +163,7 @@ export function TestimonialsSection() {
                     ))}
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed text-base flex-1 overflow-hidden text-ellipsis line-clamp-5">
+                  <p className="text-muted-foreground leading-relaxed text-base flex-1 overflow-hidden">
                     "{testimonial.text}"
                   </p>
                 </motion.div>
