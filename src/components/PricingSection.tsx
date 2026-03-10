@@ -35,7 +35,7 @@ export function PricingSection() {
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 bg-background">
       <div className="container mx-auto px-4">
-        {/* Simple Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -50,7 +50,7 @@ export function PricingSection() {
           </h2>
         </motion.div>
 
-        {/* Pricing Cards */}
+        {/* Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
@@ -58,47 +58,46 @@ export function PricingSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={plan.popular ? { y: -8 } : undefined}
               className={`relative rounded-2xl transition-all duration-300 ${
                 plan.popular
-                  ? 'bg-primary text-white md:-mt-8 md:shadow-xl ring-2 ring-primary'
-                  : 'bg-card border border-border hover:border-primary/50'
+                  ? 'ring-2 ring-primary shadow-none hover:shadow-[0_20px_40px_rgba(190,100%,50%,0.2)]'
+                  : 'border border-border hover:shadow-md'
               }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-white px-4 py-1 rounded-full text-sm font-bold">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary text-white px-4 py-1 rounded-full text-sm font-bold z-10">
                   {t('pricing.popular')}
                 </div>
               )}
 
-              {/* Content */}
-              <div className="p-8">
-                {/* Plan Name */}
-                <h3 className={`text-2xl font-bold mb-4 ${plan.popular ? 'text-white' : 'text-foreground'}`}>
+              {/* White background for all cards */}
+              <div className="bg-white rounded-2xl p-8">
+                {/* Name */}
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   {plan.name}
                 </h3>
 
                 {/* Price */}
                 <div className="mb-6">
-                  <span className={`text-5xl font-bold ${plan.popular ? 'text-white' : 'text-foreground'}`}>
+                  <span className="text-5xl font-bold text-foreground">
                     {plan.price}
                   </span>
-                  <span className={`text-sm ${plan.popular ? 'text-white/80' : 'text-muted-foreground'}`}>
+                  <span className="text-sm text-muted-foreground">
                     /{t('pricing.monthly')}
                   </span>
                 </div>
 
                 {/* Divider */}
-                <div className={`h-px mb-6 ${plan.popular ? 'bg-white/20' : 'bg-border'}`}></div>
+                <div className="h-px bg-border mb-6"></div>
 
                 {/* Features */}
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Check className={`w-5 h-5 flex-shrink-0 ${plan.popular ? 'text-white' : 'text-primary'}`} />
-                      <span className={`text-sm ${plan.popular ? 'text-white/90' : 'text-foreground'}`}>
-                        {feature}
-                      </span>
+                      <Check className="w-5 h-5 flex-shrink-0 text-primary mt-0.5" />
+                      <span className="text-sm text-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -106,10 +105,10 @@ export function PricingSection() {
                 {/* CTA Button */}
                 <a
                   href={language === 'es' ? '#contacto' : '#contact'}
-                  className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:scale-105 ${
+                  className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 ${
                     plan.popular
-                      ? 'bg-white text-primary hover:shadow-lg'
-                      : 'bg-primary text-white hover:bg-primary/90'
+                      ? 'bg-primary text-white hover:shadow-lg'
+                      : 'bg-primary/10 text-primary hover:bg-primary/20'
                   }`}
                 >
                   {t('pricing.cta')}
