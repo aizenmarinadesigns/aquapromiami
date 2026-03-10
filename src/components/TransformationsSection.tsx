@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useRef, useEffect, useState } from 'react';
 
 interface TransformCard {
   id: number;
@@ -15,7 +14,7 @@ interface TransformCard {
 const transformCards: TransformCard[] = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1000&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop',
     location: 'Kendall',
     time: '6 horas',
     service: 'Limpieza profunda',
@@ -23,7 +22,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1576056201312-1697304da793?w=1000&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1576056201312-1697304da793?w=800&h=600&fit=crop',
     location: 'Coral Gables',
     time: '3 días',
     service: 'Renovación Diamond Brite',
@@ -31,7 +30,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 3,
-    image: 'https://images.unsplash.com/photo-1600007687-98b52511c3a5?w=1000&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1600007687-98b52511c3a5?w=800&h=600&fit=crop',
     location: 'Key Biscayne',
     time: '1 día',
     service: 'Lavado con ácido',
@@ -39,11 +38,11 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1000&h=600&fit=crop',
-    location: 'Miami Lakes',
-    time: '5 horas',
-    service: 'Servicio semanal',
-    price: '$250',
+    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&h=600&fit=crop',
+    location: 'Hialeah',
+    time: '4 días',
+    service: 'Renovación Diamond Brite',
+    price: '$5,800',
   },
 ];
 
@@ -51,6 +50,7 @@ export function TransformationsSection() {
   const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateCardsPerView = () => {
@@ -85,69 +85,52 @@ export function TransformationsSection() {
     return cards;
   };
 
-  const visibleCards = getVisibleCards();
-
   return (
-    <section id="transformaciones" className="py-12 md:py-20 bg-background">
+    <section id="transformaciones" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
-        {/* Header with Navigation Arrows on Top Right */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-10 md:mb-14"
-        >
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-            <div>
-              <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
-                <span className="lang-es">Resultados Reales</span>
-                <span className="lang-en hidden">Real Results</span>
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center md:text-left">
-                <span className="lang-es">Antes & Después</span>
-                <span className="lang-en hidden">Before & After</span>
-              </h2>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-12">
+          <div>
+            <div className="inline-block px-3 py-1 bg-blue-100 text-primary rounded-full text-xs md:text-sm font-semibold mb-3">
+              <span className="lang-es">RESULTADOS REALES</span>
+              <span className="lang-en hidden">REAL RESULTS</span>
             </div>
-
-            {/* Navigation Arrows */}
-            <div className="flex gap-3 justify-center md:justify-end">
-              <button
-                onClick={handlePrev}
-                className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-secondary hover:border-secondary hover:text-white transition-all"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="w-6 h-6" />
-              </button>
-              <button
-                onClick={handleNext}
-                className="flex items-center justify-center w-12 h-12 bg-card shadow-md rounded-full border border-border hover:bg-secondary hover:border-secondary hover:text-white transition-all"
-                aria-label="Next"
-              >
-                <ChevronRight className="w-6 h-6" />
-              </button>
-            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+              <span className="lang-es">Antes & Después</span>
+              <span className="lang-en hidden">Before & After</span>
+            </h2>
           </div>
 
-          <p className="text-sm md:text-base text-muted-foreground text-center md:text-left">
-            <span className="lang-es">Transformaciones reales en Miami-Dade. Ver para creer.</span>
-            <span className="lang-en hidden">Real transformations in Miami-Dade. See to believe.</span>
-          </p>
-        </motion.div>
+          {/* Navigation Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handlePrev}
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={handleNext}
+              className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
 
-        {/* Carousel Cards */}
-        <div className="mb-8 md:mb-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {visibleCards.map((card, index) => (
-              <motion.div
-                key={`${currentIndex}-${index}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="overflow-hidden rounded-2xl bg-card shadow-lg border border-border hover:shadow-xl transition-shadow"
+        {/* Carousel */}
+        <div className="mb-6">
+          <div
+            ref={containerRef}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {getVisibleCards().map((card) => (
+              <div
+                key={card.id}
+                className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
               >
                 {/* Image */}
-                <div className="h-64 md:h-80 overflow-hidden bg-muted">
+                <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
                   <img
                     src={card.image}
                     alt={card.location}
@@ -155,18 +138,18 @@ export function TransformationsSection() {
                   />
                 </div>
 
-                {/* Info Section */}
-                <div className="p-5 md:p-6">
+                {/* Info Grid */}
+                <div className="p-6">
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <p className="text-xs uppercase font-semibold text-secondary mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase mb-1">
                         <span className="lang-es">Ubicación</span>
                         <span className="lang-en hidden">Location</span>
                       </p>
                       <p className="text-sm font-bold text-foreground">{card.location}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-semibold text-secondary mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase mb-1">
                         <span className="lang-es">Tiempo</span>
                         <span className="lang-en hidden">Time</span>
                       </p>
@@ -176,38 +159,37 @@ export function TransformationsSection() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-xs uppercase font-semibold text-secondary mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase mb-1">
                         <span className="lang-es">Servicio</span>
                         <span className="lang-en hidden">Service</span>
                       </p>
                       <p className="text-sm font-bold text-foreground">{card.service}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase font-semibold text-secondary mb-1">
+                      <p className="text-xs font-semibold text-gray-500 uppercase mb-1">
                         <span className="lang-es">Inversión</span>
                         <span className="lang-en hidden">Investment</span>
                       </p>
-                      <p className="text-sm font-bold text-secondary">{card.price}</p>
+                      <p className="text-sm font-bold text-blue-500">{card.price}</p>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Dots Navigation */}
+        {/* Dots */}
         <div className="flex justify-center gap-2">
-          {Array.from({ length: transformCards.length }).map((_, index) => (
+          {transformCards.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
               className={`transition-all duration-300 rounded-full ${
                 index === currentIndex
-                  ? 'bg-secondary w-8 h-2'
-                  : 'bg-muted w-2 h-2 hover:bg-muted-foreground'
+                  ? 'bg-blue-500 w-8 h-2'
+                  : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>

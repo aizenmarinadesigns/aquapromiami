@@ -1,7 +1,6 @@
 import { Phone, MessageCircle, Star, Shield, Award, Languages } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/hero-pool.jpg';
 
 export function HeroSection() {
   const { t } = useLanguage();

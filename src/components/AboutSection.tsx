@@ -80,9 +80,9 @@ export function AboutSection() {
           >
             <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-border bg-muted">
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=800&fit=crop&crop=faces"
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=900&fit=crop"
                 alt="Equipo de mantenimiento de piscinas AquaPro Miami"
-                className="w-full h-full object-cover aspect-square"
+                className="w-full h-full object-cover"
               />
             </div>
           </motion.div>
