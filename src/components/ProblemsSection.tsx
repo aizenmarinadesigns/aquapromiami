@@ -10,10 +10,10 @@ export function ProblemsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const problems = [
-    { icon: AlertTriangle, title: t('problems.1.title'), desc: t('problems.1.desc'), color: 'text-red-500' },
-    { icon: PhoneOff, title: t('problems.2.title'), desc: t('problems.2.desc'), color: 'text-orange-500' },
-    { icon: TrendingUp, title: t('problems.3.title'), desc: t('problems.3.desc'), color: 'text-yellow-500' },
-    { icon: Users, title: t('problems.4.title'), desc: t('problems.4.desc'), color: 'text-purple-500' },
+    { icon: AlertTriangle, title: t('problems.1.title'), desc: t('problems.1.desc') },
+    { icon: PhoneOff, title: t('problems.2.title'), desc: t('problems.2.desc') },
+    { icon: TrendingUp, title: t('problems.3.title'), desc: t('problems.3.desc') },
+    { icon: Users, title: t('problems.4.title'), desc: t('problems.4.desc') },
   ];
 
   return (
@@ -40,7 +40,7 @@ export function ProblemsSection() {
               className="card-elevated text-center p-3 md:p-6"
             >
               <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-2 md:mb-4">
-                <problem.icon className={`w-6 h-6 md:w-8 md:h-8 ${problem.color}`} />
+                <problem.icon className="w-6 h-6 md:w-8 md:h-8 text-primary" />
               </div>
               <h3 className="text-sm md:text-lg font-bold text-foreground mb-1 md:mb-2">{problem.title}</h3>
               <p className="text-muted-foreground text-xs md:text-sm">{problem.desc}</p>
