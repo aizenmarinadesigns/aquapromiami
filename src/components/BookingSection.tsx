@@ -47,7 +47,7 @@ export function BookingSection() {
   };
 
   return (
-    <section id="booking" className="py-12 md:py-20 bg-muted/30">
+    <section id="booking" className="py-12 md:py-20 bg-muted">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -108,7 +108,7 @@ export function PricingSection() {
                   className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 ${
                     plan.popular
                       ? 'bg-secondary text-white hover:bg-secondary/90 hover:shadow-lg'
-                      : 'border-2 border-foreground text-foreground hover:bg-foreground/5'
+                      : 'bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20'
                   }`}
                 >
                   {t('pricing.cta')}

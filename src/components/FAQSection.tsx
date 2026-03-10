@@ -22,7 +22,7 @@ export function FAQSection() {
   ];
 
   return (
-    <section ref={ref} className="py-12 md:py-20 bg-background">
+    <section ref={ref} className="py-12 md:py-20 bg-pool-dark">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,13 +30,13 @@ export function FAQSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-16"
         >
-          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider">
+          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             FAQ
           </span>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mt-2 mb-2 md:mb-3 px-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 mb-2 md:mb-3 px-4">
             {t('faq.title')}
           </h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl mx-auto px-4">
+          <p className="text-secondary-foreground/70 text-sm md:text-base max-w-2xl mx-auto px-4">
             {t('faq.subtitle')}
           </p>
         </motion.div>
@@ -48,15 +48,15 @@ export function FAQSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="border border-border rounded-lg md:rounded-xl overflow-hidden"
+              className="border border-secondary-foreground/20 rounded-lg md:rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-3 md:p-5 text-left bg-card hover:bg-muted/50 transition-colors"
+                className="w-full flex items-center justify-between p-3 md:p-5 text-left bg-secondary-foreground/5 hover:bg-secondary-foreground/10 transition-colors"
               >
-                <span className="font-medium text-foreground pr-4 text-sm md:text-base">{faq.q}</span>
+                <span className="font-medium text-white pr-4 text-sm md:text-base">{faq.q}</span>
                 <ChevronDown
-                  className={`w-4 h-4 md:w-5 md:h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-4 h-4 md:w-5 md:h-5 text-secondary-foreground/60 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
@@ -70,7 +70,7 @@ export function FAQSection() {
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="overflow-hidden"
               >
-                <p className="p-3 md:p-5 pt-0 text-muted-foreground leading-relaxed text-sm md:text-base">
+                <p className="p-3 md:p-5 pt-0 text-secondary-foreground/70 leading-relaxed text-sm md:text-base">
                   {faq.a}
                 </p>
               </motion.div>
