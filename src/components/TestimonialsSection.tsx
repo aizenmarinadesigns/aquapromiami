@@ -81,24 +81,30 @@ export function TestimonialsSection() {
   const cardWidth = 320;
   const gapWidth = 32;
   const itemWidth = cardWidth + gapWidth;
-  const singleSetWidth = baseTestimonials.length * itemWidth;
 
-  // Continuous scrolling
+  // Continuous smooth scrolling
   useEffect(() => {
     if (isHovered || !isInView) return;
 
-    const scrollInterval = setInterval(() => {
-      setPosition((prev) => {
-        const newPos = prev + itemWidth;
-        if (newPos >= singleSetWidth) {
-          return 0;
-        }
-        return newPos;
-      });
-    }, 4000);
+    let animationFrameId: number;
+    let currentPosition = 0;
 
-    return () => clearInterval(scrollInterval);
-  }, [isHovered, isInView, singleSetWidth, itemWidth]);
+    const animate = () => {
+      currentPosition += 0.5; // Smooth continuous movement
+      const singleSetWidth = baseTestimonials.length * itemWidth;
+
+      if (currentPosition >= singleSetWidth) {
+        currentPosition = 0;
+      }
+
+      setPosition(currentPosition);
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered, isInView, baseTestimonials.length, itemWidth]);
 
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
@@ -123,7 +129,7 @@ export function TestimonialsSection() {
 
         {/* Infinite Carousel */}
         <div
-          className="relative overflow-hidden"
+          className="relative overflow-hidden mb-8"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -133,7 +139,7 @@ export function TestimonialsSection() {
             transition={{
               type: 'tween',
               ease: 'linear',
-              duration: 0.8,
+              duration: 0.1,
             }}
           >
             {testimonials.map((testimonial, index) => (
@@ -171,6 +177,28 @@ export function TestimonialsSection() {
             ))}
           </motion.div>
         </div>
+
+        {/* Reviews CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-8"
+        >
+          <p className="text-muted-foreground text-base md:text-lg mb-4">
+            <span className="lang-es">Sus reseñas son lo que nos hace crecer. Si quieres dejarnos una, </span>
+            <span className="lang-en hidden">Your reviews help us grow. If you'd like to leave one, </span>
+            <a
+              href="https://www.google.com/maps/place/AquaPro+Miami/@25.7617,-80.6684,11z"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary font-semibold hover:underline"
+            >
+              <span className="lang-es">click aquí</span>
+              <span className="lang-en hidden">click here</span>
+            </a>
+          </p>
+        </motion.div>
       </div>
     </section>
   );
