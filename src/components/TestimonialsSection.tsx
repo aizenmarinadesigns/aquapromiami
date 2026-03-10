@@ -84,27 +84,30 @@ export function TestimonialsSection() {
 
   // Continuous smooth scrolling
   useEffect(() => {
-    if (isHovered || !isInView) return;
+    if (!isInView) return;
 
     let animationFrameId: number;
     let currentPosition = 0;
+    let isPaused = isHovered;
 
     const animate = () => {
-      currentPosition += 0.5; // Smooth continuous movement
-      const singleSetWidth = baseTestimonials.length * itemWidth;
+      if (!isPaused) {
+        currentPosition += 0.5; // Smooth continuous movement
+        const singleSetWidth = baseTestimonials.length * itemWidth;
 
-      if (currentPosition >= singleSetWidth) {
-        currentPosition = 0;
+        if (currentPosition >= singleSetWidth) {
+          currentPosition = 0;
+        }
+
+        setPosition(currentPosition);
       }
-
-      setPosition(currentPosition);
       animationFrameId = requestAnimationFrame(animate);
     };
 
     animationFrameId = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [isHovered, isInView, baseTestimonials.length, itemWidth]);
+  }, [isInView, baseTestimonials.length, itemWidth, isHovered]);
 
   return (
     <section ref={ref} id={sectionId} className="py-12 md:py-20 section-light">
