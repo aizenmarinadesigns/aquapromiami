@@ -6,15 +6,15 @@ import heroImage from '@/assets/hero-pool.jpg';
 export function HeroSection() {
   const { t } = useLanguage();
 
-  const whatsappNumber = '34623282101';
+  const whatsappNumber = '13055550100';
   const whatsappMessage = encodeURIComponent(t('whatsapp.message'));
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   const badges = [
     { icon: Star, label: t('hero.badge.rating'), color: 'text-yellow-400' },
-    { icon: Shield, label: t('hero.badge.licensed'), color: 'text-primary' },
-    { icon: Award, label: t('hero.badge.certified'), color: 'text-primary' },
-    { icon: Languages, label: t('hero.badge.spanish'), color: 'text-primary' },
+    { icon: Shield, label: t('hero.badge.licensed'), color: 'text-secondary' },
+    { icon: Award, label: t('hero.badge.certified'), color: 'text-secondary' },
+    { icon: Languages, label: t('hero.badge.spanish'), color: 'text-secondary' },
   ];
 
   return (
@@ -22,7 +22,7 @@ export function HeroSection() {
       {/* Background Image with Parallax */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1563427927-e61b5f4e2b5b?w=1600&h=1000&fit=crop')` }}
       >
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 via-secondary/70 to-primary/50" />
@@ -58,7 +58,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-3 justify-center mb-8 md:mb-12 px-4"
           >
             <a
-              href="tel:+34623282101"
+              href="tel:+13055550100"
               className="btn-coral inline-flex items-center justify-center gap-2 text-sm md:text-base lg:text-lg px-4 md:px-6 lg:px-8 py-3 md:py-4"
             >
               <Phone className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />

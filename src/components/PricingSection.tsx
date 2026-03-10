@@ -42,7 +42,7 @@ export function PricingSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
+          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider block mb-2">
             {t('nav.pricing')}
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">
@@ -61,7 +61,7 @@ export function PricingSection() {
               whileHover={plan.popular ? { y: -8 } : undefined}
               className={`relative rounded-2xl transition-all duration-300 ${
                 plan.popular
-                  ? 'ring-2 ring-primary shadow-none hover:shadow-[0_20px_40px_rgba(190,100%,50%,0.2)]'
+                  ? 'ring-2 ring-secondary shadow-none hover:shadow-[0_20px_40px_rgba(224,78%,21%,0.2)]'
                   : 'border border-border hover:shadow-md'
               }`}
             >
@@ -96,7 +96,7 @@ export function PricingSection() {
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 flex-shrink-0 text-primary mt-0.5" />
+                      <Check className="w-5 h-5 flex-shrink-0 text-secondary mt-0.5" />
                       <span className="text-sm text-foreground">{feature}</span>
                     </li>
                   ))}
@@ -107,8 +107,8 @@ export function PricingSection() {
                   href={language === 'es' ? '#contacto' : '#contact'}
                   className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 ${
                     plan.popular
-                      ? 'bg-primary text-white hover:shadow-lg'
-                      : 'bg-primary/10 text-primary hover:bg-primary/20'
+                      ? 'bg-secondary text-white hover:bg-secondary/90 hover:shadow-lg'
+                      : 'border-2 border-foreground text-foreground hover:bg-foreground/5'
                   }`}
                 >
                   {t('pricing.cta')}

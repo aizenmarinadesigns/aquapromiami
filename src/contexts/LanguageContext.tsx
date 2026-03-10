@@ -46,7 +46,7 @@ const translations: Record<string, Record<Language, string>> = {
   'problems.cta': { es: 'Descubra Nuestra Diferencia', en: 'Discover Our Difference' },
 
   // Services
-  'services.title': { es: 'Así Es Como Mantenemos Su Piscina Perfecta Todas las Semanas', en: 'This Is How We Keep Your Pool Perfect Every Week' },
+  'services.title': { es: 'Como Mantenemos Su Piscina Perfecta Todas las Semanas', en: 'How We Keep Your Pool Perfect Every Week' },
   'services.1.title': { es: 'Limpieza Profesional Completa', en: 'Complete Professional Cleaning' },
   'services.1.items': { 
     es: 'Cepillado de paredes y piso|Aspirado del fondo|Limpieza de línea de agua|Vaciado de canastas|Limpieza de skimmers', 
@@ -185,7 +185,7 @@ const translations: Record<string, Record<Language, string>> = {
   'contact.message': { es: 'Mensaje (opcional)', en: 'Message (optional)' },
   'contact.submit': { es: 'Enviar Mi Solicitud - Llamada en 2 Horas', en: 'Submit My Request - Call Within 2 Hours' },
   'contact.privacy': { es: 'Su información está segura. Nunca compartimos sus datos con terceros.', en: 'Your information is safe. We never share your data with third parties.' },
-  'contact.alt.title': { es: 'O Contáctenos Directamente', en: 'Or Contact Us Directly' },
+  'contact.alt.title': { es: 'Contáctenos Directamente', en: 'Contact Us Directly' },
   'contact.success': { es: '¡Gracias! Le llamaremos en menos de 2 horas.', en: 'Thank you! We\'ll call you within 2 hours.' },
 
   // Final CTA
