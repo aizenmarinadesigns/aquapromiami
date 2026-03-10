@@ -30,7 +30,7 @@ export function FAQSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-16"
         >
-          <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
+          <span className="text-[#0f3a5f] font-semibold text-xs md:text-sm uppercase tracking-wider">
             FAQ
           </span>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 mb-2 md:mb-3 px-4">
@@ -48,15 +48,15 @@ export function FAQSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="border border-secondary-foreground/20 rounded-lg md:rounded-xl overflow-hidden"
+              className="border border-gray-300 rounded-lg md:rounded-xl overflow-hidden bg-white"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-3 md:p-5 text-left bg-secondary-foreground/5 hover:bg-secondary-foreground/10 transition-colors"
+                className="w-full flex items-center justify-between p-3 md:p-5 text-left bg-white hover:bg-gray-50 transition-colors"
               >
-                <span className="font-medium text-white pr-4 text-sm md:text-base">{faq.q}</span>
+                <span className="font-medium text-[#0f3a5f] pr-4 text-sm md:text-base">{faq.q}</span>
                 <ChevronDown
-                  className={`w-4 h-4 md:w-5 md:h-5 text-secondary-foreground/60 flex-shrink-0 transition-transform duration-300 ${
+                  className={`w-4 h-4 md:w-5 md:h-5 text-gray-600 flex-shrink-0 transition-transform duration-300 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
@@ -70,7 +70,7 @@ export function FAQSection() {
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className="overflow-hidden"
               >
-                <p className="p-3 md:p-5 pt-0 text-secondary-foreground/70 leading-relaxed text-sm md:text-base">
+                <p className="p-3 md:p-5 pt-0 text-gray-700 leading-relaxed text-sm md:text-base">
                   {faq.a}
                 </p>
               </motion.div>
