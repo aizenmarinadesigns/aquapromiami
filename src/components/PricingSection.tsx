@@ -62,7 +62,7 @@ export function PricingSection() {
               className={`relative rounded-2xl transition-all duration-300 ${
                 plan.popular
                   ? 'ring-2 ring-secondary shadow-none hover:shadow-[0_20px_40px_rgba(32,55,90,0.2)] hover:ring-2 hover:ring-secondary'
-                  : 'border-2 border-secondary hover:shadow-md'
+                  : 'border-2 border-primary hover:shadow-md'
               }`}
             >
               {/* Popular Badge */}
