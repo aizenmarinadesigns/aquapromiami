@@ -13,7 +13,7 @@ const translations: Record<string, Record<Language, string>> = {
   'nav.services': { es: 'Servicios', en: 'Services' },
   'nav.testimonials': { es: 'Testimonios', en: 'Testimonials' },
   'nav.pricing': { es: 'Precios', en: 'Pricing' },
-  'nav.guarantees': { es: 'Garantías', en: 'Guarantees' },
+  'nav.work': { es: 'Nuestro Trabajo', en: 'Our Work' },
   'nav.contact': { es: 'Contacto', en: 'Contact' },
   
   // Hero

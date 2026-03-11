@@ -80,7 +80,7 @@ export function AboutSection() {
           >
             <div className="w-full rounded-2xl overflow-hidden shadow-lg border border-border bg-muted">
               <img
-                src="/about/miami-pools-troupe.png"
+                src="/aquapromiami/about/miami-pools-troupe.png"
                 alt="Equipo de AquaPro Miami"
                 className="w-full h-full object-cover"
               />
