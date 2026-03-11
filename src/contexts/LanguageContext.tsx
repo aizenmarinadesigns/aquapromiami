@@ -188,6 +188,10 @@ const translations: Record<string, Record<Language, string>> = {
   'contact.privacy': { es: 'Su información está segura. Nunca compartimos sus datos con terceros.', en: 'Your information is safe. We never share your data with third parties.' },
   'contact.alt.title': { es: 'Contáctenos Directamente', en: 'Contact Us Directly' },
   'contact.success': { es: '¡Gracias! Le llamaremos en menos de 2 horas.', en: 'Thank you! We\'ll call you within 2 hours.' },
+  'contact.direct_call': { es: 'Llamada Directa', en: 'Direct Call' },
+  'contact.emergency': { es: 'Llamadas de Emergencia', en: 'Emergency Calls' },
+  'contact.whatsapp': { es: 'Respuesta rápida', en: 'Quick Response' },
+  'contact.email': { es: 'Email', en: 'Email' },
 
   // Final CTA
   'final.title': { es: '¿Listo Para Disfrutar Su Piscina Sin Preocupaciones?', en: 'Ready to Enjoy Your Pool Worry-Free?' },

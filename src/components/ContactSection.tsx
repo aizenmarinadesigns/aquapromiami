@@ -246,7 +246,21 @@ export function ContactSection() {
                 </div>
                 <div className="min-w-0">
                   <p className="font-bold text-foreground text-sm md:text-base">contact@aquapro.com</p>
-                  <p className="text-xs md:text-sm text-muted-foreground">Email</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">{t('contact.email')}</p>
+                </div>
+              </a>
+
+              {/* Emergency Calls */}
+              <a
+                href={`tel:+${miamiiPhoneNumber}`}
+                className="flex items-center gap-3 md:gap-4 p-4 md:p-5 bg-card rounded-xl border border-red-200 hover:border-red-400 transition-colors group"
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-red-100 flex items-center justify-center group-hover:bg-red-200 transition-colors flex-shrink-0">
+                  <Phone className="w-5 h-5 md:w-6 md:h-6 text-red-500 group-hover:text-red-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-bold text-foreground text-sm md:text-base">+1 (305) 555-0100</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">{t('contact.emergency')}</p>
                 </div>
               </a>
             </div>
