@@ -14,15 +14,15 @@ interface TransformCard {
 const transformCards: TransformCard[] = [
   {
     id: 1,
-    image: '/antes-despues/construccion-pileta.png',
+    image: '/aquapromiami/antes-despues/construccion-pileta.png',
     location: 'Kendall',
     time: '4 días',
-    service: 'Construcción y Renovación',
+    service: 'Construcción',
     price: '$6,500',
   },
   {
     id: 2,
-    image: '/antes-despues/pileta-renovada.png',
+    image: '/aquapromiami/antes-despues/pileta-renovada.png',
     location: 'Coral Gables',
     time: '3 días',
     service: 'Renovación Diamond Brite',
@@ -30,7 +30,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 3,
-    image: '/antes-despues/4-limpieza-acido-key-biscayne.png',
+    image: '/aquapromiami/antes-despues/4-limpieza-acido-key-biscayne.png',
     location: 'Key Biscayne',
     time: '1 día',
     service: 'Lavado con ácido',
@@ -38,10 +38,10 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 4,
-    image: '/antes-despues/mantenimiento-de-equipos.png',
+    image: '/aquapromiami/antes-despues/mantenimiento-de-equipos.png',
     location: 'Hialeah',
     time: '2 horas',
-    service: 'Mantenimiento de Equipos',
+    service: 'Mantenimiento',
     price: '$350',
   },
 ];
@@ -104,35 +104,27 @@ export function TransformationsSection() {
           </p>
         </div>
 
-        {/* Carousel with Side Arrows */}
-        <div className="flex items-center justify-center gap-4 mb-6">
-          {/* Left Arrow */}
-          <button
-            onClick={handlePrev}
-            className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          {/* Cards Grid */}
-          <div className="flex-1">
-            <div
-              ref={containerRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              {getVisibleCards().map((card) => (
-                <div
-                  key={card.id}
-                  className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
-                >
-                  {/* Image */}
-                  <div className="relative h-80 md:h-96 overflow-hidden bg-gray-100">
-                    <img
-                      src={card.image}
-                      alt={card.location}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
+        {/* Carousel with Right Arrows */}
+        <div className="mb-6">
+          <div className="flex items-start justify-between gap-4">
+            {/* Cards Grid */}
+            <div className="flex-1">
+              <div
+                ref={containerRef}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
+                {getVisibleCards().map((card) => (
+                  <div
+                    key={card.id}
+                    className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
+                  >
+                    {/* Image */}
+                    <div className="relative h-80 md:h-96 overflow-hidden bg-gray-100">
+                      <img
+                        src={card.image}
+                        alt={card.location}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
                     {/* Before/After Labels */}
                     <div className="absolute left-4 top-4 bg-black/60 text-white px-3 py-1.5 rounded-full text-xs font-bold uppercase">
                       <span className="lang-es">Antes</span>
@@ -182,16 +174,25 @@ export function TransformationsSection() {
                   </div>
                 </div>
               ))}
+              </div>
+            </div>
+
+            {/* Right Side Arrows */}
+            <div className="flex flex-col gap-3 flex-shrink-0 pt-2">
+              <button
+                onClick={handlePrev}
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
             </div>
           </div>
-
-          {/* Right Arrow */}
-          <button
-            onClick={handleNext}
-            className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
         </div>
 
         {/* Dots */}
