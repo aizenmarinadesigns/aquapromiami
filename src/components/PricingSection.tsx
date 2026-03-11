@@ -108,10 +108,10 @@ export function PricingSection() {
                   className={`block w-full py-3 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg ${
                     plan.popular
                       ? 'bg-secondary text-white hover:bg-secondary/90'
-                      : 'bg-primary text-secondary hover:bg-primary/90'
+                      : 'bg-primary text-secondary hover:bg-primary/90 border border-secondary'
                   }`}
                 >
-                  {plan.popular ? (t('contact.submit')) : t('pricing.cta')}
+                  {plan.popular ? 'Elegir Plan' : t('pricing.cta')}
                 </a>
               </div>
             </motion.div>
