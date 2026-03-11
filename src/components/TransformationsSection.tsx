@@ -4,8 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 
 interface TransformCard {
   id: number;
-  imageBefore: string;
-  imageAfter: string;
+  image: string;
   location: string;
   time: string;
   service: string;
@@ -15,8 +14,7 @@ interface TransformCard {
 const transformCards: TransformCard[] = [
   {
     id: 1,
-    imageBefore: '/aquapromiami/antes-despues/construccion-pileta.png',
-    imageAfter: '/aquapromiami/antes-despues/pileta-renovada.png',
+    image: '/aquapromiami/antes-despues/construccion-pileta.png',
     location: 'Kendall',
     time: '6 horas',
     service: 'Limpieza profunda',
@@ -24,8 +22,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 2,
-    imageBefore: '/aquapromiami/antes-despues/analisis-ph-pileta.png',
-    imageAfter: '/aquapromiami/antes-despues/pileta-latino.png',
+    image: '/aquapromiami/antes-despues/pileta-latino.png',
     location: 'Coral Gables',
     time: '3 días',
     service: 'Renovación Diamond Brite',
@@ -33,8 +30,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 3,
-    imageBefore: '/aquapromiami/antes-despues/latino-pileta.png',
-    imageAfter: '/aquapromiami/antes-despues/4-limpieza-acido-key-biscayne.png',
+    image: '/aquapromiami/antes-despues/4-limpieza-acido-key-biscayne.png',
     location: 'Key Biscayne',
     time: '1 día',
     service: 'Lavado con ácido',
@@ -42,8 +38,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 4,
-    imageBefore: '/aquapromiami/antes-despues/mantenimiento-de-equipos.png',
-    imageAfter: '/aquapromiami/antes-despues/mantenimiento-equipo-2.png',
+    image: '/aquapromiami/antes-despues/mantenimiento-de-equipos.png',
     location: 'Hialeah',
     time: '2 horas',
     service: 'Mantenimiento',
@@ -137,33 +132,13 @@ export function TransformationsSection() {
               key={card.id}
               className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 hover:shadow-xl transition-shadow"
             >
-              {/* Image Container - 30/70 Before/After ratio */}
-              <div className="grid grid-cols-10 gap-0 bg-gray-100">
-                {/* Before Image - 30% */}
-                <div className="col-span-3 relative h-48 md:h-56 overflow-hidden">
-                  <img
-                    src={card.imageBefore}
-                    alt={`${card.location} antes`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute left-2 top-2 bg-white/90 text-gray-800 px-2 py-1 rounded-full text-xs font-bold uppercase">
-                    <span className="lang-es">Antes</span>
-                    <span className="lang-en hidden">Before</span>
-                  </div>
-                </div>
-
-                {/* After Image - 70% */}
-                <div className="col-span-7 relative h-48 md:h-56 overflow-hidden">
-                  <img
-                    src={card.imageAfter}
-                    alt={`${card.location} después`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute right-2 top-2 bg-blue-500 text-white px-2 py-1 rounded-full text-xs font-bold uppercase">
-                    <span className="lang-es">Después</span>
-                    <span className="lang-en hidden">After</span>
-                  </div>
-                </div>
+              {/* Image Container */}
+              <div className="relative h-48 md:h-56 overflow-hidden bg-gray-100">
+                <img
+                  src={card.image}
+                  alt={card.location}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Info Grid */}
