@@ -173,6 +173,7 @@ const translations: Record<string, Record<Language, string>> = {
 
   // Contact Form
   'contact.title': { es: 'Solicite Su Cotización Gratis en 30 Segundos', en: 'Request Your Free Quote in 30 Seconds' },
+  'contact.subtitle': { es: 'Cuéntenos sobre su piscina y nos pondremos en contacto dentro de 2 horas', en: 'Tell us about your pool and we\'ll get back to you within 2 hours' },
   'contact.name': { es: 'Nombre', en: 'Name' },
   'contact.phone': { es: 'Teléfono', en: 'Phone' },
   'contact.email': { es: 'Email (opcional)', en: 'Email (optional)' },
