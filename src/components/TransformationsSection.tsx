@@ -89,9 +89,9 @@ export function TransformationsSection() {
     <section id="transformaciones" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Header with Navigation */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
-          <div className="text-center md:text-left">
-            <div className="inline-block px-3 py-1 bg-blue-100 text-primary rounded-full text-xs md:text-sm font-semibold mb-3">
+        <div className="flex flex-col items-center justify-center gap-6 mb-12">
+          <div className="text-center">
+            <div className="inline-block px-3 py-1 text-primary rounded-full text-xs md:text-sm font-semibold mb-3">
               <span className="lang-es">RESULTADOS REALES</span>
               <span className="lang-en hidden">REAL RESULTS</span>
             </div>
@@ -106,7 +106,7 @@ export function TransformationsSection() {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex gap-3 justify-center md:justify-end flex-shrink-0">
+          <div className="flex gap-3 justify-center flex-shrink-0">
             <button
               onClick={handlePrev}
               className="flex items-center justify-center w-12 h-12 rounded-full bg-white border-2 border-gray-300 hover:bg-blue-500 hover:border-blue-500 hover:text-white transition-all"
