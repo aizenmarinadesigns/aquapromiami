@@ -69,9 +69,12 @@ export function ContactSection() {
           <span className="text-secondary font-semibold text-xs md:text-sm uppercase tracking-wider">
             {t('nav.contact')}
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mt-2">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
             {t('contact.title')}
           </h2>
+          <p className="text-muted-foreground text-sm md:text-base mt-3 md:mt-4 max-w-2xl mx-auto">
+            {t('contact.subtitle')}
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
