@@ -14,15 +14,15 @@ interface TransformCard {
 const transformCards: TransformCard[] = [
   {
     id: 1,
-    image: '/antes-despues/construccion-pileta.png',
+    image: '/aquapromiami/antes-despues/construccion-pileta.png',
     location: 'Kendall',
     time: '4 días',
-    service: 'Construcción y Renovación',
+    service: 'Construcción',
     price: '$6,500',
   },
   {
     id: 2,
-    image: '/antes-despues/pileta-renovada.png',
+    image: '/aquapromiami/antes-despues/pileta-renovada.png',
     location: 'Coral Gables',
     time: '3 días',
     service: 'Renovación Diamond Brite',
@@ -30,7 +30,7 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 3,
-    image: '/antes-despues/4-limpieza-acido-key-biscayne.png',
+    image: '/aquapromiami/antes-despues/4-limpieza-acido-key-biscayne.png',
     location: 'Key Biscayne',
     time: '1 día',
     service: 'Lavado con ácido',
@@ -38,10 +38,10 @@ const transformCards: TransformCard[] = [
   },
   {
     id: 4,
-    image: '/antes-despues/mantenimiento-de-equipos.png',
+    image: '/aquapromiami/antes-despues/mantenimiento-de-equipos.png',
     location: 'Hialeah',
     time: '2 horas',
-    service: 'Mantenimiento de Equipos',
+    service: 'Mantenimiento',
     price: '$350',
   },
 ];
